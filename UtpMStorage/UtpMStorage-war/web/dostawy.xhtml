@@ -33,8 +33,9 @@
                             <p:outputLabel value="Magazyn" for="acMagazyn" />
                             <p:autoComplete id="acMagazyn" forceSelection="true" value="#{dostawyController.d.magazyn}" completeMethod="#{autoCompleteView.completeText}" />
 
-                            <p:outputLabel value="Data zamówienia:" for="dcData" />
-                            <p:autoComplete id="dcData" dropdown="true" value="#{dostawyController.s}" completeMethod="#{autoCompleteView.completeText}" />                       
+                            <p:outputLabel for="dcData" value="Data zamówienia:" />
+                            <p:calendar id="dcData" value="#{dostawyController.d.dataZamowienia}" mode="dcData" />
+                        
                         </h:panelGrid>
                         <p:commandButton value="Dodaj" action="#{dostawyController.add()}" />
                     </h:form>
