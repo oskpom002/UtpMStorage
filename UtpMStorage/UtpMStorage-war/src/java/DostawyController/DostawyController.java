@@ -81,7 +81,7 @@ public class DostawyController implements Serializable {
     public String add() 
     {
         d.setStan(Boolean.TRUE);
-        DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.GERMAN);
+        DateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.GERMAN);
         Date date = null;
         try {
             date = format.parse(s);
