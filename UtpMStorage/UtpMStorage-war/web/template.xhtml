@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+<h:head>
+   <title>Home Page</title>
+</h:head>
+<p:tabView style="vertical-align: middle; horiz-align: middle">
+   <p:tab>
+      <!-- overrides title on tab-->
+      <f:facet name="title">
+         <p:graphicImage value="logotype.png" style="vertical-align: middle"/>
+      </f:facet>
+   </p:tab>
+</p:tabView>
+<h:body style="background: url(background2.jpg)">
+   <p:growl id="aa" showDetail="false"/>
+   <h:form>
+       <h:panelGrid columns="2">
+           <p:column>
+   <p:menu>
+      <p:submenu label="Sklep">
+         <p:menuitem value="Sprzedaż" update=""  />
+         <p:menuitem value="Zakup"  update="" />
+         <p:menuitem value="Serwis" url=""/>
+         <p:menuitem value="Dodaj klienta" url=""/>
+      </p:submenu>
+      <p:submenu label="Dostawy">
+         <p:menuitem value="Dodaj dostawę" url="dostawy.xhtml" />
+         <p:menuitem value="Anuluj dostawę" url=""/>
+      </p:submenu>
+      <p:submenu label="Raporty">
+         <p:menuitem value="Podsumowania sprzedaży" url="http://www.primefaces.org" />
+         <p:menuitem value="Faktury" url=""/>
+      </p:submenu>
+      <p:submenu label="Dziennik Zdarzeń">
+         <p:menuitem value="Historia Sprzedaży" url=""/>
+         <p:menuitem value="Zmiany parametrów" url=""/>
+         <p:menuitem value="Dodaj użytkownika systemu" url="" />
+      </p:submenu>
+   </p:menu>
+           </p:column>
+           <p:column style="position: absolute; align-content: center; ">
+                     <ui:insert name="content" id="sas"></ui:insert>
+           </p:column>
+       </h:panelGrid>
+
+
+      <p:stack icon="stack.png" expanded="true">
+         <p:menuitem value="Główna" icon="home.png" url="index.xhtml"/>
+         <p:menuitem value="Sprzedaż" icon="salesicon.png" url="produkty.xhtml"/>
+      </p:stack>
+   </h:form>
+
+
+</h:body>
+
+
+
+</f:view>
+</html>
