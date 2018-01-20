@@ -7,9 +7,11 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <f:view>
+              
         <h:head>
             <title>Strona główna</title>
-        </h:head>
+        </h:head>        
+        
         <h:body>
             <h:outputStylesheet name="css/style.css" />
             <ui:composition template="./template.xhtml">
@@ -17,33 +19,91 @@
                 <ui:define name="content">
                     <h:form>
                         <p:growl id="msgs" showDetail="true" />
+                        <p:panel id="dost" header="Dostawy">
+                            <p:panelGrid columns="2" >
+                                <p:panel id="panel" header="Dodaj produkt" style="margin-bottom:10px;width: 700px;">
+                                                                  
+                                        <p:panelGrid columns="2" columnClasses="forty-percent top-alignment, sixty-percent top-alignment" style="width:100%;" layout="grid" styleClass="ui-noborder">                          
+    
+                                            <p:outputLabel value="Ilosc:" for="ilosc" />
+                                            <p:inputText id="ilosc" value="#{dostawyController.dostawyTemp.ilosc}" title="Ilosc" required="true" requiredMessage="The Ilosc field is required."/>
+                                            <p:outputLabel value="Imei:" for="imei" />
+                                            <p:inputText id="imei" value="#{dostawyController.dostawyTemp.imei}" title="Imei" />
+                                            <p:outputLabel value="Magazyn:" for="magazyn" />
+                                            <p:inputText id="magazyn" value="#{dostawyController.dostawyTemp.magazyn}" title="Magazyn" required="true" requiredMessage="The Magazyn field is required."/>
+                                            <p:outputLabel value="Marka:" for="marka" />
+                                            <p:inputText id="marka" value="#{dostawyController.dostawyTemp.marka}" title="Marka" required="true" requiredMessage="The Marka field is required."/>
+                                            <p:outputLabel value="Model:" for="model" />
+                                            <p:inputText id="model" value="#{dostawyController.dostawyTemp.model}" title="Model" required="true" requiredMessage="The Model field is required."/>
+                                            <p:outputLabel value="Typ:" for="typ" />
+                                            <p:inputText id="typ" value="#{dostawyController.dostawyTemp.typ}" title="Typ" required="true" requiredMessage="The Typ field is required."/>
+                                            <p:outputLabel for="dcData" value="Data zamówienia:" />
+                                            <p:calendar id="dcData" value="#{dostawyController.dostawyTemp.dataZamowienia}" mode="dcData" />
+                                                                                                                               
+                                                         
+                                        <p:commandButton value="Dodaj" action="#{dostawyController.add()}" />
+                                        </p:panelGrid>
+                             
+                                </p:panel>
+                                <p:panel id="paneltab" header="Lista produktów:" style="margin-bottom:10px;width: 700px;">
 
-                        <p:panel id="panel" header="Dostawy" style="margin-bottom:10px;width: 700px;">
-                            <p:panelGrid columns="2" columnClasses="forty-percent top-alignment, sixty-percent top-alignment" style="width:100%;" layout="grid"> 
-                                <p:outputLabel value="Typ:" for="acTyp" />
-                                <p:autoComplete id="acTyp" value="#{autoCompleteView.theme1}" completeMethod="#{autoCompleteView.completeTheme}"
-                                                var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" converter="themeConverter" forceSelection="true" />
 
-                                <p:outputLabel value="Marka:" for="acMarka" />   
-                                <p:autoComplete id="acMarka" minQueryLength="3" value="#{dostawyController.d.marka}" completeMethod="#{autoCompleteView.completeText}" effect="fade" />
+                                        <p:dataTable value="#{dostawyController.getDostawylist()}" var="item">
+              
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="DataZamowienia"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.dataZamowienia}">
+                                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Ilosc"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.ilosc}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Imei"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.imei}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Magazyn"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.magazyn}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Marka"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.marka}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Model"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.model}"/>
+                                            </p:column>
 
-                                <p:outputLabel value="Model:" for="acModel" />
-                                <p:autoComplete id="acModel" queryDelay="1000" value="#{dostawyController.d.model}" completeMethod="#{autoCompleteView.completeText}" effect="blind" />
-
-                                <p:outputLabel value="IMEI:" for="acImei" />
-                                <p:autoComplete id="acImei" maxResults="5" value="#{dostawyController.d.imei}" completeMethod="#{autoCompleteView.completeText}" />
-
-                                <p:outputLabel value="Magazyn" for="acMagazyn" />
-                                <p:autoComplete id="acMagazyn" forceSelection="true" value="#{dostawyController.d.magazyn}" completeMethod="#{autoCompleteView.completeText}" />
-
-                                <p:outputLabel for="dcData" value="Data zamówienia:" />
-                                <p:calendar id="dcData" value="#{dostawyController.d.dataZamowienia}" mode="dcData" />
-
-                                <p:commandButton value="Dodaj" action="#{dostawyController.add()}" />
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Typ"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.typ}"/>
+                                            </p:column>
+                                        </p:dataTable>
+        
+                                    <p:commandButton value="Dodaj dane do bazy danych" action="#{dostawyController.addToDataBase()}" />
+                                     
+                                </p:panel>
+                              
                             </p:panelGrid>
                         </p:panel>
-
-
+ 
                     </h:form>
                 </ui:define>
             </ui:composition>
