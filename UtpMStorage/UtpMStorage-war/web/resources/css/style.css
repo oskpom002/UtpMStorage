@@ -1,0 +1,16 @@
+ul.ui-menu-child
+{
+    white-space: nowrap;
+    width: 290px !important;
+}
+.forty-percent {
+    width: 40%;
+}
+
+.sixty-percent {
+    width: 60%;
+}
+
+.top-alignment {
+    vertical-align: top;
+}

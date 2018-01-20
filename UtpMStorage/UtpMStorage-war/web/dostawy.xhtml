@@ -11,33 +11,39 @@
             <title>Strona główna</title>
         </h:head>
         <h:body>
+            <h:outputStylesheet name="css/style.css" />
             <ui:composition template="./template.xhtml">
                 <ui:define name="title">Strona główna</ui:define>
                 <ui:define name="content">
                     <h:form>
                         <p:growl id="msgs" showDetail="true" />
-                        <h:panelGrid columns="2" cellpadding="5">
 
-                            <p:outputLabel value="Typ:" for="acTyp" />
-                            <p:autoComplete id="acTyp" value="#{dostawyController.d.typ}" completeMethod="#{autoCompleteView.completeText}" />
+                        <p:panel id="panel" header="Dostawy" style="margin-bottom:10px;width: 700px;">
+                            <p:panelGrid columns="2" columnClasses="forty-percent top-alignment, sixty-percent top-alignment" style="width:100%;" layout="grid"> 
+                                <p:outputLabel value="Typ:" for="acTyp" />
+                                <p:autoComplete id="acTyp" value="#{autoCompleteView.theme1}" completeMethod="#{autoCompleteView.completeTheme}"
+                                                var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" converter="themeConverter" forceSelection="true" />
 
-                            <p:outputLabel value="Marka:" for="acMarka" />   
-                            <p:autoComplete id="acMarka" minQueryLength="3" value="#{dostawyController.d.marka}" completeMethod="#{autoCompleteView.completeText}" effect="fade" />
+                                <p:outputLabel value="Marka:" for="acMarka" />   
+                                <p:autoComplete id="acMarka" minQueryLength="3" value="#{dostawyController.d.marka}" completeMethod="#{autoCompleteView.completeText}" effect="fade" />
 
-                            <p:outputLabel value="Model:" for="acModel" />
-                            <p:autoComplete id="acModel" queryDelay="1000" value="#{dostawyController.d.model}" completeMethod="#{autoCompleteView.completeText}" effect="blind" />
+                                <p:outputLabel value="Model:" for="acModel" />
+                                <p:autoComplete id="acModel" queryDelay="1000" value="#{dostawyController.d.model}" completeMethod="#{autoCompleteView.completeText}" effect="blind" />
 
-                            <p:outputLabel value="IMEI:" for="acImei" />
-                            <p:autoComplete id="acImei" maxResults="5" value="#{dostawyController.d.imei}" completeMethod="#{autoCompleteView.completeText}" />
+                                <p:outputLabel value="IMEI:" for="acImei" />
+                                <p:autoComplete id="acImei" maxResults="5" value="#{dostawyController.d.imei}" completeMethod="#{autoCompleteView.completeText}" />
 
-                            <p:outputLabel value="Magazyn" for="acMagazyn" />
-                            <p:autoComplete id="acMagazyn" forceSelection="true" value="#{dostawyController.d.magazyn}" completeMethod="#{autoCompleteView.completeText}" />
+                                <p:outputLabel value="Magazyn" for="acMagazyn" />
+                                <p:autoComplete id="acMagazyn" forceSelection="true" value="#{dostawyController.d.magazyn}" completeMethod="#{autoCompleteView.completeText}" />
 
-                            <p:outputLabel for="dcData" value="Data zamówienia:" />
-                            <p:calendar id="dcData" value="#{dostawyController.d.dataZamowienia}" mode="dcData" />
-                        
-                        </h:panelGrid>
-                        <p:commandButton value="Dodaj" action="#{dostawyController.add()}" />
+                                <p:outputLabel for="dcData" value="Data zamówienia:" />
+                                <p:calendar id="dcData" value="#{dostawyController.d.dataZamowienia}" mode="dcData" />
+
+                                <p:commandButton value="Dodaj" action="#{dostawyController.add()}" />
+                            </p:panelGrid>
+                        </p:panel>
+
+
                     </h:form>
                 </ui:define>
             </ui:composition>
