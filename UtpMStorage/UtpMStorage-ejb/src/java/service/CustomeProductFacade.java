@@ -100,8 +100,14 @@ public class CustomeProductFacade {
         return em.createQuery("SELECT DISTINCT(p.model) FROM Produkt p")
                 .getResultList();
     }
-        public List<Produkt> findMagazyny() {
+
+    public List<Produkt> findMagazyny() {
         return em.createQuery("SELECT DISTINCT(p.magazyn) FROM Produkt p")
+                .getResultList();
+    }
+    public List<Produkt> findProduktByDostawa(Date data) {
+        return em.createQuery("SELECT p FROM Produkt p JOIN p.dostawy d WHERE d.dataZamowienia = :data")
+                .setParameter("data", data)
                 .getResultList();
     }
 }

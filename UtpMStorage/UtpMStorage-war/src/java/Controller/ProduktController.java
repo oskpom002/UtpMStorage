@@ -12,6 +12,7 @@ import java.util.*;
 import javax.ejb.EJB;
 import service.ProduktFacade;
 import entity.*;
+import org.primefaces.event.SelectEvent;
 import service.CustomeProductFacade;
 import service.DostawaFacade;
 
@@ -41,6 +42,7 @@ public class ProduktController implements Serializable {
     //używane do zapisywania dostawy
     private List<Produkt> produktListTemp = new ArrayList<Produkt>();
     private Produkt produktTemp = new Produkt();
+    private Date data= new java.sql.Date(Calendar.getInstance().getTimeInMillis());
 
     /**
      * Creates a new instance of ProduktController
@@ -143,7 +145,6 @@ public class ProduktController implements Serializable {
      */
     public String add() {
 
-      
         produktTemp.setStan(Boolean.TRUE);
         produktListTemp.add(produktTemp);
 
@@ -173,4 +174,19 @@ public class ProduktController implements Serializable {
         return "index";
     }
 
+    public List<Produkt> findProduktByDostawa() {
+        return this.customeProductFacade.findProduktByDostawa(data);
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public List<Produkt> onDateSelect() {
+        return findProduktByDostawa();
+    }
 }

@@ -18,76 +18,74 @@
                 <ui:define name="title">Strona główna</ui:define>
                 <ui:define name="content">
                     <h:form>
-                        <p:panel id="panel" header="Dodaj klienta" style="margin-bottom:10px;width: 700px;">
+                        <p:panel id="strona">
+                            <p:panelGrid columns="2" columnClasses="forty-percent top-alignment, sixty-percent top-alignment" style="width:100%;" layout="grid" styleClass="ui-noborder">
+                                <p:panel id="datapanel" header="Wybierz datę :" style="margin-bottom:10px;width: 350px;">
+                                    <p:outputLabel for="event" value="Data zamówienia:" />
+                                    <p:calendar id="event" value="#{produktController.data}">
+                                        <p:ajax event="dateSelect" listener="#{produktController.onDateSelect()}" update="produktyTabele" />
+                                    </p:calendar>
+                                </p:panel> 
+                                <p:panel id="tablepanel" header="Dostawy z dnia:" style="margin-bottom:10px;width: 800px;">
 
-                            <p:dataTable id="singleDT" var="car" value="#{dostawaController.findAll()}" selectionMode="single" selection="#{dostawaController.selectedDostawa}" rowKey="#{car.did}">
 
-                                <p:column headerText="Numer dostawy">
-                                    <h:outputText value="#{car.did}" />
-                                </p:column>
-                                <p:column headerText="Data">
-                                    <h:outputText value="#{car.dataZamowienia}" />
-                                </p:column>
 
-                            </p:dataTable>
+                                    <h1><h:outputText value="List"/></h1>
+                                    <p:dataTable id="produktyTabele" widgetVar="produktyTabele" value="#{produktController.onDateSelect()}" var="item">
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Pid"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.pid}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Ilosc"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.ilosc}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Imei"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.imei}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Magazyn"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.magazyn}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Marka"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.marka}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Model"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.model}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Stan"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.stan}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Typ"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.typ}"/>
+                                        </p:column>
+                                    </p:dataTable>
 
-                        </p:panel>    
-                        
-                        
-                        
-                        <h:form>
-                            <h1><h:outputText value="Zamówione produkty"/></h1>
-                            <p:dataTable value="#{dostawaController.selectedDostawa.produkty}" var="item">       
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Ilosc"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.ilosc}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Imei"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.imei}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Magazyn"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.magazyn}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Marka"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.marka}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Model"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.model}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Stan"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.stan}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Typ"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.typ}"/>
-                                </p:column>
-                            </p:dataTable>
-                        </h:form>
-
-                        
-                        
+                                </p:panel>
+                            </p:panelGrid>
+                        </p:panel>
                     </h:form>
-
-
                 </ui:define>
             </ui:composition>
         </h:body>

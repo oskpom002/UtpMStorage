@@ -7,6 +7,7 @@ package service;
 
 import entity.Dostawa;
 import entity.Produkt;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -30,8 +31,8 @@ public class DostawaFacade extends AbstractFacade<Dostawa> {
     public DostawaFacade() {
         super(Dostawa.class);
     }
-    
-       public List<Dostawa> findById(Integer did) {
+
+    public List<Dostawa> findById(Integer did) {
         return em.createQuery("SELECT d FROM Dostawa d WHERE d.did = did")
                 .setParameter("did", did)
                 .getResultList();
