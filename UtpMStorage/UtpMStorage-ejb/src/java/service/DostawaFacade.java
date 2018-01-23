@@ -5,7 +5,9 @@
  */
 package service;
 
+import entity.Dostawa;
 import entity.Produkt;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +17,7 @@ import javax.persistence.PersistenceContext;
  * @author Olek
  */
 @Stateless
-public class ProduktFacade extends AbstractFacade<Produkt> {
+public class DostawaFacade extends AbstractFacade<Dostawa> {
 
     @PersistenceContext(unitName = "UtpMStorage-ejbPU")
     private EntityManager em;
@@ -25,8 +27,13 @@ public class ProduktFacade extends AbstractFacade<Produkt> {
         return em;
     }
 
-    public ProduktFacade() {
-        super(Produkt.class);
+    public DostawaFacade() {
+        super(Dostawa.class);
     }
     
+       public List<Dostawa> findById(Integer did) {
+        return em.createQuery("SELECT d FROM Dostawa d WHERE d.did = did")
+                .setParameter("did", did)
+                .getResultList();
+    }
 }

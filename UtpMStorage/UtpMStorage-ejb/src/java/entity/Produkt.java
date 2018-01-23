@@ -6,12 +6,14 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -64,7 +66,29 @@ public class Produkt implements Serializable {
     @Column(name = "typ")
     private String typ;
 
+    @ManyToMany(mappedBy = "produkty")
+    private List<Klient> klienci;
+
+    @ManyToMany(mappedBy = "produkty")
+    private List<Dostawa> dostawy;
+    
     public Produkt() {
+    }
+
+    public List<Dostawa> getDostawy() {
+        return dostawy;
+    }
+
+    public void setDostawy(List<Dostawa> dostawy) {
+        this.dostawy = dostawy;
+    }
+
+    public List<Klient> getKlienci() {
+        return klienci;
+    }
+
+    public void setKlienci(List<Klient> klienci) {
+        this.klienci = klienci;
     }
 
     public Produkt(Integer pid) {
@@ -159,5 +183,5 @@ public class Produkt implements Serializable {
     public String toString() {
         return "entity.Produkt[ pid=" + pid + " ]";
     }
-    
+
 }

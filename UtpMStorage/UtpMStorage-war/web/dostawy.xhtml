@@ -7,11 +7,11 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <f:view>
-              
+
         <h:head>
             <title>Strona główna</title>
         </h:head>        
-        
+
         <h:body>
             <h:outputStylesheet name="css/style.css" />
             <ui:composition template="./template.xhtml">
@@ -22,88 +22,82 @@
                         <p:panel id="dost" header="Dostawy">
                             <p:panelGrid columns="2" >
                                 <p:panel id="panel" header="Dodaj produkt" style="margin-bottom:10px;width: 700px;">
-                                                                  
-                                        <p:panelGrid columns="2" columnClasses="forty-percent top-alignment, sixty-percent top-alignment" style="width:100%;" layout="grid" styleClass="ui-noborder">                          
-    
-                                            <p:outputLabel value="Ilosc:" for="ilosc" />
-                                            <p:inputText id="ilosc" value="#{dostawyController.dostawyTemp.ilosc}" title="Ilosc" required="true" requiredMessage="The Ilosc field is required."/>
-                                            <p:outputLabel value="Imei:" for="imei" />
-                                            <p:inputText id="imei" value="#{dostawyController.dostawyTemp.imei}" title="Imei" />
-                                            <p:outputLabel value="Magazyn:" for="magazyn" />
-                                            <p:inputText id="magazyn" value="#{dostawyController.dostawyTemp.magazyn}" title="Magazyn" required="true" requiredMessage="The Magazyn field is required."/>
-                                            <p:outputLabel value="Marka:" for="marka" />
-                                            <p:inputText id="marka" value="#{dostawyController.dostawyTemp.marka}" title="Marka" required="true" requiredMessage="The Marka field is required."/>
-                                            <p:outputLabel value="Model:" for="model" />
-                                            <p:inputText id="model" value="#{dostawyController.dostawyTemp.model}" title="Model" required="true" requiredMessage="The Model field is required."/>
-                                            <p:outputLabel value="Typ:" for="typ" />
-                                            <p:inputText id="typ" value="#{dostawyController.dostawyTemp.typ}" title="Typ" required="true" requiredMessage="The Typ field is required."/>
-                                            <p:outputLabel for="dcData" value="Data zamówienia:" />
-                                            <p:calendar id="dcData" value="#{dostawyController.dostawyTemp.dataZamowienia}" mode="dcData" />
-                                                                                                                               
-                                                         
-                                        <p:commandButton value="Dodaj" action="#{dostawyController.add()}" />
-                                        </p:panelGrid>
-                             
+
+                                    <p:panelGrid columns="2" columnClasses="forty-percent top-alignment, sixty-percent top-alignment" style="width:100%;" layout="grid" styleClass="ui-noborder">                          
+
+                                        <p:outputLabel value="Ilosc:" for="ilosc" />
+                                        <p:inputText id="ilosc" value="#{produktController.produktTemp.ilosc}" title="Ilosc" required="true" requiredMessage="The Ilosc field is required."/>
+                                        <p:outputLabel value="Imei:" for="imei" />
+                                        <p:inputText id="imei" value="#{produktController.produktTemp.imei}" title="Imei" />
+                                        <p:outputLabel value="Magazyn:" for="magazyn" />
+                                        <p:inputText id="magazyn" value="#{produktController.produktTemp.magazyn}" title="Magazyn" required="true" requiredMessage="The Magazyn field is required."/>
+                                        <p:outputLabel value="Marka:" for="marka" />
+                                        <p:inputText id="marka" value="#{produktController.produktTemp.marka}" title="Marka" required="true" requiredMessage="The Marka field is required."/>
+                                        <p:outputLabel value="Model:" for="model" />
+                                        <p:inputText id="model" value="#{produktController.produktTemp.model}" title="Model" required="true" requiredMessage="The Model field is required."/>
+                                        <p:outputLabel value="Typ:" for="typ" />
+                                        <p:inputText id="typ" value="#{produktController.produktTemp.typ}" title="Typ" required="true" requiredMessage="The Typ field is required."/>
+
+                                        <p:outputLabel for="dcData" value="Data zamówienia:" />
+                                        <p:calendar id="dcData" value="#{produktController.dostawaTemp.dataZamowienia}" mode="dcData" />
+
+                                        <p:commandButton value="Dodaj" action="#{produktController.add()}" >                                 
+                                        </p:commandButton>
+
+                                    </p:panelGrid>
+
                                 </p:panel>
                                 <p:panel id="paneltab" header="Lista produktów:" style="margin-bottom:10px;width: 700px;">
 
+                                    <p:dataTable value="#{produktController.produktListTemp}" var="item">
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Ilosc"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.ilosc}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Imei"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.imei}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Magazyn"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.magazyn}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Marka"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.marka}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Model"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.model}"/>
+                                        </p:column>
 
-                                        <p:dataTable value="#{dostawyController.getDostawylist()}" var="item">
-              
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="DataZamowienia"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.dataZamowienia}">
-                                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                                </h:outputText>
-                                            </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Ilosc"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.ilosc}"/>
-                                            </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Imei"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.imei}"/>
-                                            </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Magazyn"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.magazyn}"/>
-                                            </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Marka"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.marka}"/>
-                                            </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Model"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.model}"/>
-                                            </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Typ"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.typ}"/>
+                                        </p:column>
+                                    </p:dataTable>
 
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Typ"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.typ}"/>
-                                            </p:column>
-                                        </p:dataTable>
-        
-                                    <p:commandButton value="Dodaj dane do bazy danych" action="#{dostawyController.addToDataBase()}" />
-                                     
+
+                                    <p:commandButton value="Dodaj dane do bazy danych" action="#{produktController.addToDataBase()}">
+                                    </p:commandButton>
+
                                 </p:panel>
-                              
+
                             </p:panelGrid>
                         </p:panel>
- 
+
                     </h:form>
                 </ui:define>
             </ui:composition>

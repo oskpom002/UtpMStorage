@@ -27,14 +27,14 @@
         <local>service.ProduktFacade</local>
     </ejb-local-ref>
     <ejb-local-ref>
-        <ejb-ref-name>DostawyFacade</ejb-ref-name>
+        <ejb-ref-name>DostawaFacade</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
-        <local>service.DostawyFacade</local>
+        <local>service.DostawaFacade</local>
     </ejb-local-ref>
     <ejb-local-ref>
         <ejb-ref-name>MagazynyFacade</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
-        <local>service.MagazynyFacade</local>
+        <local>service.MagazynFacade</local>
     </ejb-local-ref>
      <ejb-local-ref>
         <ejb-ref-name>CustomeProductFacade</ejb-ref-name>

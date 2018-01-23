@@ -5,17 +5,17 @@
  */
 package service;
 
-import entity.Produkt;
+import entity.Magazyn;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Olek
+ * @author lukasz
  */
 @Stateless
-public class ProduktFacade extends AbstractFacade<Produkt> {
+public class MagazynFacade extends AbstractFacade<Magazyn> {
 
     @PersistenceContext(unitName = "UtpMStorage-ejbPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class ProduktFacade extends AbstractFacade<Produkt> {
         return em;
     }
 
-    public ProduktFacade() {
-        super(Produkt.class);
+    public MagazynFacade() {
+        super(Magazyn.class);
     }
     
 }

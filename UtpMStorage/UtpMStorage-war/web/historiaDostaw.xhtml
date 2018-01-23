@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view>
+
+        <h:head>
+            <title>Strona główna</title>
+        </h:head>        
+
+        <h:body>
+            <h:outputStylesheet name="css/style.css" />
+            <ui:composition template="./template.xhtml">
+                <ui:define name="title">Strona główna</ui:define>
+                <ui:define name="content">
+                    <h:form>
+                        <p:panel id="panel" header="Dodaj klienta" style="margin-bottom:10px;width: 700px;">
+
+                            <p:dataTable id="singleDT" var="car" value="#{dostawaController.findAll()}" selectionMode="single" selection="#{dostawaController.selectedDostawa}" rowKey="#{car.did}">
+
+                                <p:column headerText="Numer dostawy">
+                                    <h:outputText value="#{car.did}" />
+                                </p:column>
+                                <p:column headerText="Data">
+                                    <h:outputText value="#{car.dataZamowienia}" />
+                                </p:column>
+
+                            </p:dataTable>
+
+                        </p:panel>    
+                        
+                        
+                        
+                        <h:form>
+                            <h1><h:outputText value="Zamówione produkty"/></h1>
+                            <p:dataTable value="#{dostawaController.selectedDostawa.produkty}" var="item">       
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Ilosc"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.ilosc}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Imei"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.imei}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Magazyn"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.magazyn}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Marka"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.marka}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Model"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.model}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Stan"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.stan}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Typ"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.typ}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+
+                        
+                        
+                    </h:form>
+
+
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>

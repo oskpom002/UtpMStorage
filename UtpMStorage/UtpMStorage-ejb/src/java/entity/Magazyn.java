@@ -24,14 +24,15 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author lukasz
  */
 @Entity
-@Table(name = "magazyny")
+@Table(name = "magazyn")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Magazyny.findAll", query = "SELECT m FROM Magazyny m")
-    , @NamedQuery(name = "Magazyny.findByMid", query = "SELECT m FROM Magazyny m WHERE m.mid = :mid")
-    , @NamedQuery(name = "Magazyny.findByAdres", query = "SELECT m FROM Magazyny m WHERE m.adres = :adres")
-    , @NamedQuery(name = "Magazyny.findByNazwa", query = "SELECT m FROM Magazyny m WHERE m.nazwa = :nazwa")})
-public class Magazyny implements Serializable {
+    @NamedQuery(name = "Magazyn.findAll", query = "SELECT m FROM Magazyn m")
+    , @NamedQuery(name = "Magazyn.findByMid", query = "SELECT m FROM Magazyn m WHERE m.mid = :mid")
+    , @NamedQuery(name = "Magazyn.findByAdres", query = "SELECT m FROM Magazyn m WHERE m.adres = :adres")
+    , @NamedQuery(name = "Magazyn.findByNazwa", query = "SELECT m FROM Magazyn m WHERE m.nazwa = :nazwa")
+})
+public class Magazyn implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,14 +49,14 @@ public class Magazyny implements Serializable {
     @Column(name = "nazwa")
     private String nazwa;
 
-    public Magazyny() {
+    public Magazyn() {
     }
 
-    public Magazyny(Integer mid) {
+    public Magazyn(Integer mid) {
         this.mid = mid;
     }
 
-    public Magazyny(Integer mid, String nazwa) {
+    public Magazyn(Integer mid, String nazwa) {
         this.mid = mid;
         this.nazwa = nazwa;
     }
@@ -94,10 +95,10 @@ public class Magazyny implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Magazyny)) {
+        if (!(object instanceof Magazyn)) {
             return false;
         }
-        Magazyny other = (Magazyny) object;
+        Magazyn other = (Magazyn) object;
         if ((this.mid == null && other.mid != null) || (this.mid != null && !this.mid.equals(other.mid))) {
             return false;
         }

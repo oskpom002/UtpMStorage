@@ -5,17 +5,17 @@
  */
 package service;
 
-import entity.Magazyny;
+import entity.Klient;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author lukasz
+ * @author Olek
  */
 @Stateless
-public class MagazynyFacade extends AbstractFacade<Magazyny> {
+public class KlientFacade extends AbstractFacade<Klient> {
 
     @PersistenceContext(unitName = "UtpMStorage-ejbPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class MagazynyFacade extends AbstractFacade<Magazyny> {
         return em;
     }
 
-    public MagazynyFacade() {
-        super(Magazyny.class);
+    public KlientFacade() {
+        super(Klient.class);
     }
     
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view>
+
+        <h:head>
+            <title>Strona główna</title>
+        </h:head>        
+
+        <h:body>
+            <h:outputStylesheet name="css/style.css" />
+            <ui:composition template="./template.xhtml">
+                <ui:define name="title">Strona główna</ui:define>
+                <ui:define name="content">
+                    <h:form>
+                        <p:panel id="panel" header="Dodaj klienta" style="margin-bottom:10px;width: 700px;">
+
+                            <p:panelGrid columns="2" columnClasses="forty-percent top-alignment, sixty-percent top-alignment" style="width:100%;"  styleClass="ui-noborder">   
+                                <p:outputLabel value="Imie:" for="imie" />
+                                <p:inputText id="imie" value="#{klientController.klientTemp.imie}" title="Imie" />
+                                <p:outputLabel value="Nazwisko:" for="nazwisko" />
+                                <p:inputText id="nazwisko" value="#{klientController.klientTemp.nazwisko}" title="Nazwisko" />
+                                <p:outputLabel value="Adres:" for="adres" />
+                                <p:inputText id="adres" value="#{klientController.klientTemp.adres}" title="Adres" />
+                                <p:outputLabel value="Kontakt:" for="kontakt" />
+                                <p:inputText id="kontakt" value="#{klientController.klientTemp.kontakt}" title="Kontakt" />
+
+
+
+                                <p:commandButton value="Dodaj" action="#{klientController.addKlient()}" />
+                                </p:panelGrid>
+                        </p:panel>
+                    </h:form>
+
+
+
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>
