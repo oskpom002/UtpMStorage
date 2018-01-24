@@ -21,17 +21,15 @@
                         <p:panel id="strona">
                             <p:panelGrid columns="2" columnClasses="forty-percent top-alignment, sixty-percent top-alignment" style="width:100%;" layout="grid" styleClass="ui-noborder">
                                 <p:panel id="datapanel" header="Wybierz datę :" style="margin-bottom:10px;width: 350px;">
-                                    <p:outputLabel for="event" value="Data zamówienia:" />
-                                    <p:calendar id="event" value="#{produktController.data}">
-                                        <p:ajax event="dateSelect" listener="#{produktController.onDateSelect()}" update="produktyTabele" />
+                                    <p:calendar id="event" value="#{produktController.data}" mode="dcData" > 
+                                        <p:ajax event="dateSelect" listener="#{produktController.findProduktByDostawa()}" update="produktyTabele"  />
+                                        
                                     </p:calendar>
                                 </p:panel> 
                                 <p:panel id="tablepanel" header="Dostawy z dnia:" style="margin-bottom:10px;width: 800px;">
 
 
-
-                                    <h1><h:outputText value="List"/></h1>
-                                    <p:dataTable id="produktyTabele" widgetVar="produktyTabele" value="#{produktController.onDateSelect()}" var="item">
+                                    <p:dataTable id="produktyTabele" widgetVar="produktyTabele" value="#{produktController.findProduktByDostawa()}" var="item">
                                         <p:column>
                                             <f:facet name="header">
                                                 <h:outputText value="Pid"/>

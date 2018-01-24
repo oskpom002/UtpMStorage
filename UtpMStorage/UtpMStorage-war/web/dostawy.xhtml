@@ -21,9 +21,9 @@
                         <p:growl id="msgs" showDetail="true" />
                         <p:panel id="dost" header="Dostawy">
                             <p:panelGrid columns="2" >
-                                <p:panel id="panel" header="Dodaj produkt" style="margin-bottom:10px;width: 700px;">
+                                <p:panel id="panel" header="Dodaj produkt" style="margin-bottom:10px;width: 500px;">
 
-                                    <p:panelGrid columns="2" columnClasses="forty-percent top-alignment, sixty-percent top-alignment" style="width:100%;" layout="grid" styleClass="ui-noborder">                          
+                                    <p:panelGrid id="panelGrid1" columns="2" columnClasses="forty-percent top-alignment, sixty-percent top-alignment" style="width:100%;" layout="grid" styleClass="ui-noborder">                          
 
                                         <p:outputLabel value="Ilosc:" for="ilosc" />
                                         <p:inputText id="ilosc" value="#{produktController.produktTemp.ilosc}" title="Ilosc" required="true" requiredMessage="The Ilosc field is required."/>
@@ -36,20 +36,20 @@
                                         <p:outputLabel value="Model:" for="model" />
                                         <p:inputText id="model" value="#{produktController.produktTemp.model}" title="Model" required="true" requiredMessage="The Model field is required."/>
                                         <p:outputLabel value="Typ:" for="typ" />
-                                        <p:inputText id="typ" value="#{produktController.produktTemp.typ}" title="Typ" required="true" requiredMessage="The Typ field is required."/>
-
-                                        <p:outputLabel for="dcData" value="Data zamówienia:" />
-                                        <p:calendar id="dcData" value="#{produktController.dostawaTemp.dataZamowienia}" mode="dcData" />
-
-                                        <p:commandButton value="Dodaj" action="#{produktController.add()}" >                                 
-                                        </p:commandButton>
+                                        <p:inputText id="typ" value="#{produktController.produktTemp.typ}" title="Typ" required="true" requiredMessage="The Typ field is required."/>                                    
 
                                     </p:panelGrid>
+                                    <p:calendar id="dcData" value="#{produktController.dostawaTemp.dataZamowienia}" mode="dcData" />
+
+                                    <p:commandButton value="Dodaj" action="#{produktController.add()}" ajax="true" update="produktyTabel"   >    
+                                        <f:ajax execute="@this" render="panelGrid1"/>
+                                    </p:commandButton>
+
 
                                 </p:panel>
                                 <p:panel id="paneltab" header="Lista produktów:" style="margin-bottom:10px;width: 700px;">
 
-                                    <p:dataTable value="#{produktController.produktListTemp}" var="item">
+                                    <p:dataTable id="produktyTabel" value="#{produktController.produktListTemp}" var="item">
                                         <p:column>
                                             <f:facet name="header">
                                                 <h:outputText value="Ilosc"/>
@@ -90,7 +90,7 @@
                                     </p:dataTable>
 
 
-                                    <p:commandButton value="Dodaj dane do bazy danych" action="#{produktController.addToDataBase()}">
+                                    <p:commandButton value="Dodaj dane do bazy danych" action="#{produktController.addToDataBase()}" ajax="true" update="produktyTabel"  >
                                     </p:commandButton>
 
                                 </p:panel>

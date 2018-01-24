@@ -33,16 +33,15 @@ public class ProduktController implements Serializable {
     @EJB
     private DostawaFacade dostawaFacade;
 
-    private Dostawa dostawaTemp = new Dostawa();
-
     //Używane podczas zakupu
     private List<Produkt> selectedProdukty;
     private Produkt selectedProduct;
 
     //używane do zapisywania dostawy
+    private Dostawa dostawaTemp = new Dostawa();
     private List<Produkt> produktListTemp = new ArrayList<Produkt>();
     private Produkt produktTemp = new Produkt();
-    private Date data= new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+    private Date data = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
 
     /**
      * Creates a new instance of ProduktController
@@ -138,42 +137,6 @@ public class ProduktController implements Serializable {
         this.selectedProdukty = selectedProdukty;
     }
 
-    /**
-     * Reakcja na przycisk "Dodaj" Dodaje obiekt dostawy do listy.
-     *
-     * @return
-     */
-    public String add() {
-
-        produktTemp.setStan(Boolean.TRUE);
-        produktListTemp.add(produktTemp);
-
-        produktTemp = new Produkt();
-        return "dostawy";
-    }
-
-    /**
-     * Reakcja na przycisk "Dodaj do bazy" Dodaje listę obiektów dostawy do bazy
-     * danych.
-     *
-     * @return
-     */
-    public String addToDataBase() {
-
-        for (Produkt p : produktListTemp) {
-
-            this.produktFacade.create(p);
-        }
-
-        dostawaTemp.setProdukty(produktListTemp);
-        this.dostawaFacade.create(dostawaTemp);
-
-        dostawaTemp = new Dostawa();
-        produktListTemp = new ArrayList<Produkt>();
-
-        return "index";
-    }
-
     public List<Produkt> findProduktByDostawa() {
         return this.customeProductFacade.findProduktByDostawa(data);
     }
@@ -186,7 +149,40 @@ public class ProduktController implements Serializable {
         this.data = data;
     }
 
-    public List<Produkt> onDateSelect() {
-        return findProduktByDostawa();
+    /**
+     * Reakcja na przycisk "Dodaj" Dodaje obiekt dostawy do listy.
+     *
+     * @return
+     */
+    public void add() {
+
+        produktTemp.setStan(Boolean.TRUE);
+        produktListTemp.add(produktTemp);
+
+        produktTemp = new Produkt();
+
     }
+
+    /**
+     * Reakcja na przycisk "Dodaj do bazy" Dodaje listę obiektów dostawy do bazy
+     * danych.
+     *
+     * @return
+     */
+    public void addToDataBase() {
+
+        for (Produkt p : produktListTemp) {
+
+            this.produktFacade.create(p);
+        }
+
+        dostawaTemp.setProdukty(produktListTemp);
+        this.dostawaFacade.create(dostawaTemp);
+
+        //Tworzenie nowych obiektów.
+        dostawaTemp = new Dostawa();
+        produktListTemp = new ArrayList<Produkt>();
+
+    }
+
 }
