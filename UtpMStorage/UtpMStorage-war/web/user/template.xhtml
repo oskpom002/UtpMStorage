@@ -14,7 +14,7 @@
    <p:tab>
       <!-- overrides title on tab-->
       <f:facet name="title">
-         <p:graphicImage value="logotype.png" style="vertical-align: middle"/>
+         <p:graphicImage value="/images/logotype.png" style="vertical-align: middle"/>
       </f:facet>
    </p:tab>
 </p:tabView>
@@ -26,22 +26,11 @@
    <p:menu>
       <p:submenu label="Sklep">
          <p:menuitem value="Sprzedaż" url="/user/produkty.xhtml"  />
-        <!-- <p:menuitem value="Zakup"  update="" />
-         <p:menuitem value="Serwis" url=""/>-->
          <p:menuitem value="Dodaj klienta" url="/user/klienci.xhtml"/>
       </p:submenu>
       <p:submenu label="Dostawy">
-         <p:menuitem value="Dodaj dostawę" url="dostawy.xhtml" />
-         <p:menuitem value="Dostawy" url="historiaDostaw.xhtml"/>
-      </p:submenu>
-      <!--<p:submenu label="Raporty">
-         <p:menuitem value="Podsumowania sprzedaży" url="http://www.primefaces.org" />
-         <p:menuitem value="Faktury" url=""/>
-      </p:submenu>-->
-      <p:submenu label="Dziennik Zdarzeń">
-         <p:menuitem value="Historia Sprzedaży" url="historiaSprzedazy.xhtml"/>
-         <!--<p:menuitem value="Zmiany parametrów" url=""/>
-         <p:menuitem value="Dodaj użytkownika systemu" url="" />-->
+         <p:menuitem value="Dodaj dostawę" url="/admin/dostawy.xhtml" />
+         <p:menuitem value="Dostawy" url="/user/historiaDostaw.xhtml"/>
       </p:submenu>
    </p:menu>
            </p:column>
@@ -51,9 +40,9 @@
        </h:panelGrid>
 
 
-      <p:stack icon="stack.png" expanded="true">
-         <p:menuitem value="Główna" icon="home.png" url="index.xhtml"/>
-         <p:menuitem value="Sprzedaż" icon="salesicon.png" url="produkty.xhtml"/>
+      <p:stack icon="/images/stack.png" expanded="true">
+         <p:menuitem value="Główna" icon="/images/home.png" url="index.xhtml"/>
+         <p:menuitem value="Sprzedaż" icon="/images/salesicon.png" url="produkty.xhtml"/>
       </p:stack>
    </h:form>
 

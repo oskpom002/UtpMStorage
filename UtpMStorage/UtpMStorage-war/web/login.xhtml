@@ -12,16 +12,19 @@
 </h:head>
 
 <h:body>
-    <h:form>
-        <p:panelGrid columns="1" style="text-align: center">
-        <p:panelGrid columns="2" cellpadding="5">
-            <h:outputText value="Login"/>
-            <p:inputText />
-            <h:outputText value="Hasło: "/>
-            <p:password id="passwordKey" value="" />
-        </p:panelGrid>
-            <p:button outcome="index" value="Zaloguj" icon="ui-icon-star"/>
-    </p:panelGrid>
-    </h:form>
+    <p:panel header="Login to continue">
+
+        <h:form>
+            <h:panelGrid columns="2">
+                <p:outputLabel for="userName" value="Username"/>
+                <p:inputText id="userName" value="#{loginBean.username}" required="true"/>
+
+                <p:outputLabel for="password" value="Password"/>
+                <p:password id="password" value="#{loginBean.password}" required="true"/>
+            </h:panelGrid>
+            <p:commandButton value="Login" action="#{loginBean.login}" ajax="false"/>
+        </h:form>
+    </p:panel>
+
 </h:body>
 </html>

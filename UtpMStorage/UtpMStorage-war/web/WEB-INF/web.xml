@@ -5,12 +5,25 @@
         <web-resource-collection>
             <web-resource-name>HtmlAuth</web-resource-name>
             <description>Only accessible to admins</description>
-            <url-pattern>/*</url-pattern>
+            <url-pattern>/admin/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
         </web-resource-collection>
         <auth-constraint>
             <role-name>Admins</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint id="idUsers">
+        <display-name>Users</display-name>
+        <web-resource-collection>
+            <web-resource-name>wrUsers</web-resource-name>
+            <description>For the nice Users we have!</description>
+            <url-pattern>/user/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Users</role-name>
         </auth-constraint>
     </security-constraint>
     <login-config>
@@ -20,6 +33,10 @@
     <security-role>
         <description>The Administrators of the system</description>
         <role-name>Admins</role-name>
+    </security-role>
+    <security-role>
+        <description>Grouping other users</description>
+        <role-name>Users</role-name>
     </security-role>
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
