@@ -4,7 +4,7 @@
         <display-name>Admin</display-name>
         <web-resource-collection>
             <web-resource-name>HtmlAuth</web-resource-name>
-            <description>Only accessible to admins</description>
+            <description>Dostep tylko dla administracji</description>
             <url-pattern>/admin/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
@@ -17,7 +17,7 @@
         <display-name>Users</display-name>
         <web-resource-collection>
             <web-resource-name>wrUsers</web-resource-name>
-            <description>For the nice Users we have!</description>
+            <description>Dostep dla uzytkownik z uprawnieniami user</description>
             <url-pattern>/user/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
@@ -57,7 +57,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>index.xhtml</welcome-file>
+        <welcome-file>user/index.xhtml</welcome-file>
     </welcome-file-list>
     <ejb-local-ref>
         <ejb-ref-name>ProduktFacade</ejb-ref-name>
