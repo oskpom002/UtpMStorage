@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+<h:head>
+   <title>Home Page</title>
+</h:head>
+<p:tabView style="vertical-align: middle; horiz-align: middle">
+   <p:tab>
+      <!-- overrides title on tab-->
+      <f:facet name="title">
+         <p:graphicImage value="logotype.png" style="vertical-align: middle"/>
+      </f:facet>
+   </p:tab>
+</p:tabView>
+<h:body style="background: url(background2.jpg)">
+    <h:form>
+ <p:growl id="growl" showDetail="true" sticky="true"  />  
+    </h:form>
+ 
+
+
+</h:body>
+
+
+
+</f:view>
+</html>

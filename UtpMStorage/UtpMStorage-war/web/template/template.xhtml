@@ -12,7 +12,6 @@
 </h:head>
 <p:tabView style="vertical-align: middle; horiz-align: middle">
    <p:tab>
-      <!-- overrides title on tab-->
       <f:facet name="title">
          <p:graphicImage value="/images/logotype.png" style="vertical-align: middle"/>
       </f:facet>
@@ -30,7 +29,14 @@
       </p:submenu>
       <p:submenu label="Dostawy">
          <p:menuitem value="Dodaj dostawę" url="/admin/dostawy.xhtml" />
-         <p:menuitem value="Dostawy" url="/user/historiaDostaw.xhtml"/>
+         <p:menuitem value="Dostawy" url="/admin/historiaDostaw.xhtml"/>
+      </p:submenu>
+      <p:submenu label="Dziennik Zdarzeń">
+         <p:menuitem value="Historia Sprzedaży" url="historiaSprzedazy.xhtml"/>
+         <p:menuitem value="Zmiany parametrów" url=""/>
+      </p:submenu>
+      <p:submenu label="Sesja">
+          <p:menuitem value="Wyloguj" action="#{logoutController.logout()}"/>
       </p:submenu>
    </p:menu>
            </p:column>

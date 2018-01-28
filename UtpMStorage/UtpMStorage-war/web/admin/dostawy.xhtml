@@ -14,11 +14,11 @@
 
         <h:body>
             <h:outputStylesheet name="css/style.css" />
-            <ui:composition template="./template.xhtml">
+            <ui:composition template="/template/template.xhtml">
                 <ui:define name="title">Strona główna</ui:define>
                 <ui:define name="content">
                     <h:form>
-                        <p:growl id="msgs" showDetail="true" />
+                        <p:growl id="msgs" showDetail="true" sticky="true" autoUpdate="true"/>
                         <p:panel id="dost" header="Dostawy">
                             <p:panelGrid columns="2" >
                                 <p:panel id="panel" header="Dodaj produkt" style="margin-bottom:10px;width: 500px;">
@@ -26,17 +26,17 @@
                                     <p:panelGrid id="panelGrid1" columns="2" columnClasses="forty-percent top-alignment, sixty-percent top-alignment" style="width:100%;" layout="grid" styleClass="ui-noborder">                          
 
                                         <p:outputLabel value="Ilosc:" for="ilosc" />
-                                        <p:inputText id="ilosc" value="#{produktController.produktTemp.ilosc}" title="Ilosc" required="true" requiredMessage="The Ilosc field is required."/>
+                                        <p:inputText id="ilosc" value="#{produktController.ilosc}" title="Ilosc"/>
                                         <p:outputLabel value="Imei:" for="imei" />
-                                        <p:inputText id="imei" value="#{produktController.produktTemp.imei}" title="Imei" />
+                                        <p:inputText id="imei" value="#{produktController.imei}" title="Imei" />
                                         <p:outputLabel value="Magazyn:" for="magazyn" />
-                                        <p:inputText id="magazyn" value="#{produktController.produktTemp.magazyn}" title="Magazyn" required="true" requiredMessage="The Magazyn field is required."/>
+                                        <p:inputText id="magazyn" value="#{produktController.magazyn}" title="Magazyn"/>
                                         <p:outputLabel value="Marka:" for="marka" />
-                                        <p:inputText id="marka" value="#{produktController.produktTemp.marka}" title="Marka" required="true" requiredMessage="The Marka field is required."/>
+                                        <p:inputText id="marka" value="#{produktController.marka}" title="Marka" />
                                         <p:outputLabel value="Model:" for="model" />
-                                        <p:inputText id="model" value="#{produktController.produktTemp.model}" title="Model" required="true" requiredMessage="The Model field is required."/>
+                                        <p:inputText id="model" value="#{produktController.model}" title="Model"/>
                                         <p:outputLabel value="Typ:" for="typ" />
-                                        <p:inputText id="typ" value="#{produktController.produktTemp.typ}" title="Typ" required="true" requiredMessage="The Typ field is required."/>                                    
+                                        <p:inputText id="typ" value="#{produktController.typ}" title="Typ"/>                                    
 
                                     </p:panelGrid>
                                     <p:calendar id="dcData" value="#{produktController.dostawaTemp.dataZamowienia}" mode="dcData" />

@@ -12,6 +12,8 @@ import java.util.*;
 import javax.ejb.EJB;
 import service.ProduktFacade;
 import entity.*;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 import service.CustomeProductFacade;
 import service.DostawaFacade;
@@ -42,6 +44,12 @@ public class ProduktController implements Serializable {
     private List<Produkt> produktListTemp = new ArrayList<Produkt>();
     private Produkt produktTemp = new Produkt();
     private Date data = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+    private String ilosc;
+    private String imei;
+    private String magazyn;
+    private String marka;
+    private String model;
+    private String typ;
 
     /**
      * Creates a new instance of ProduktController
@@ -71,6 +79,119 @@ public class ProduktController implements Serializable {
 
     public List<Produkt> find() {
         return (List<Produkt>) this.produktFacade.find(this);
+    }
+
+    /**
+     * Reakcja na przycisk "Dodaj" Dodaje obiekt dostawy do listy.
+     *
+     * @return
+     */
+    public void add() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        if (ilosc.equals("") || ilosc.equals(null)) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole ilość nie może być puste"));
+
+        } else if (magazyn.equals("") || magazyn.equals(null)) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole magazyn nie może być puste"));
+
+        } else if (marka.equals("") || magazyn.equals(null)) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole marka nie może być puste"));
+        } else if (model.equals("") || model.equals(null)) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole marka nie może być puste"));
+        }
+        else if(typ.equals("") || typ.equals(null)){
+         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole typ nie może być puste"));
+        }
+        else {
+        produktTemp = new Produkt();
+        produktTemp.setTyp(typ);
+        produktTemp.setMagazyn(magazyn);
+        produktTemp.setModel(model);
+        produktTemp.setMarka(marka);
+        produktTemp.setIlosc(Integer.valueOf(ilosc));
+        if(!imei.equals(null) || imei.equals(""))
+        {produktTemp.setImei(imei);}
+        produktListTemp.add(produktTemp);
+        typ="";
+        magazyn="";
+        model="";
+        imei="";
+        marka="";
+        ilosc="";
+
+        produktTemp = new Produkt();
+        }
+
+    }
+
+    /**
+     * Reakcja na przycisk "Dodaj do bazy" Dodaje listę obiektów dostawy do bazy
+     * danych.
+     *
+     * @return
+     */
+    public void addToDataBase() {
+
+        for (Produkt p : produktListTemp) {
+
+            this.produktFacade.create(p);
+        }
+
+        dostawaTemp.setProdukty(produktListTemp);
+        this.dostawaFacade.create(dostawaTemp);
+
+        //Tworzenie nowych obiektów.
+        dostawaTemp = new Dostawa();
+        produktListTemp = new ArrayList<Produkt>();
+
+    }
+
+    public String getIlosc() {
+        return ilosc;
+    }
+
+    public void setIlosc(String ilosc) {
+        this.ilosc = ilosc;
+    }
+
+    public String getImei() {
+        return imei;
+    }
+
+    public void setImei(String imei) {
+        this.imei = imei;
+    }
+
+    public String getMagazyn() {
+        return magazyn;
+    }
+
+    public void setMagazyn(String magazyn) {
+        this.magazyn = magazyn;
+    }
+
+    public String getMarka() {
+        return marka;
+    }
+
+    public void setMarka(String marka) {
+        this.marka = marka;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getTyp() {
+        return typ;
+    }
+
+    public void setTyp(String typ) {
+        this.typ = typ;
     }
 
     public ProduktFacade getProduktFacade() {
@@ -147,42 +268,6 @@ public class ProduktController implements Serializable {
 
     public void setData(Date data) {
         this.data = data;
-    }
-
-    /**
-     * Reakcja na przycisk "Dodaj" Dodaje obiekt dostawy do listy.
-     *
-     * @return
-     */
-    public void add() {
-
-        produktTemp.setStan(Boolean.TRUE);
-        produktListTemp.add(produktTemp);
-
-        produktTemp = new Produkt();
-
-    }
-
-    /**
-     * Reakcja na przycisk "Dodaj do bazy" Dodaje listę obiektów dostawy do bazy
-     * danych.
-     *
-     * @return
-     */
-    public void addToDataBase() {
-
-        for (Produkt p : produktListTemp) {
-
-            this.produktFacade.create(p);
-        }
-
-        dostawaTemp.setProdukty(produktListTemp);
-        this.dostawaFacade.create(dostawaTemp);
-
-        //Tworzenie nowych obiektów.
-        dostawaTemp = new Dostawa();
-        produktListTemp = new ArrayList<Produkt>();
-
     }
 
 }
