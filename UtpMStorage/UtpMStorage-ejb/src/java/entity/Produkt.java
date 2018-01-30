@@ -14,8 +14,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -46,6 +49,7 @@ public class Produkt implements Serializable {
     @Basic(optional = false)
     @Column(name = "pid")
     private Integer pid;
+
     @Column(name = "ilosc")
     private Integer ilosc;
     @Size(max = 255)
@@ -66,13 +70,29 @@ public class Produkt implements Serializable {
     @Column(name = "typ")
     private String typ;
 
-    @ManyToMany(mappedBy = "produkty")
-    private List<Klient> klienci;
+//    @ManyToMany(mappedBy = "produkty")
+//    private List<Klient> klienci;
 
     @ManyToMany(mappedBy = "produkty")
     private List<Dostawa> dostawy;
-    
+
+    @OneToMany (mappedBy = "produkt")
+    private List <Sprzedaz> sprzedaze;
+
     public Produkt() {
+    }
+
+    public List<Sprzedaz> getSprzedaze() {
+        return sprzedaze;
+    }
+
+    public void setSprzedaze(List<Sprzedaz> sprzedaze) {
+        this.sprzedaze = sprzedaze;
+    }
+
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public List<Dostawa> getDostawy() {
@@ -83,13 +103,13 @@ public class Produkt implements Serializable {
         this.dostawy = dostawy;
     }
 
-    public List<Klient> getKlienci() {
-        return klienci;
-    }
-
-    public void setKlienci(List<Klient> klienci) {
-        this.klienci = klienci;
-    }
+//    public List<Klient> getKlienci() {
+//        return klienci;
+//    }
+//
+//    public void setKlienci(List<Klient> klienci) {
+//        this.klienci = klienci;
+//    }
 
     public Produkt(Integer pid) {
         this.pid = pid;

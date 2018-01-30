@@ -14,7 +14,7 @@ import service.ProduktFacade;
 import entity.*;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import org.primefaces.event.SelectEvent;
+import org.primefaces.context.RequestContext;
 import service.CustomeProductFacade;
 import service.DostawaFacade;
 
@@ -98,28 +98,27 @@ public class ProduktController implements Serializable {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole marka nie może być puste"));
         } else if (model.equals("") || model.equals(null)) {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole marka nie może być puste"));
-        }
-        else if(typ.equals("") || typ.equals(null)){
-         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole typ nie może być puste"));
-        }
-        else {
-        produktTemp = new Produkt();
-        produktTemp.setTyp(typ);
-        produktTemp.setMagazyn(magazyn);
-        produktTemp.setModel(model);
-        produktTemp.setMarka(marka);
-        produktTemp.setIlosc(Integer.valueOf(ilosc));
-        if(!imei.equals(null) || imei.equals(""))
-        {produktTemp.setImei(imei);}
-        produktListTemp.add(produktTemp);
-        typ="";
-        magazyn="";
-        model="";
-        imei="";
-        marka="";
-        ilosc="";
+        } else if (typ.equals("") || typ.equals(null)) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole typ nie może być puste"));
+        } else {
+            produktTemp = new Produkt();
+            produktTemp.setTyp(typ);
+            produktTemp.setMagazyn(magazyn);
+            produktTemp.setModel(model);
+            produktTemp.setMarka(marka);
+            produktTemp.setIlosc(Integer.valueOf(ilosc));
+            if (!imei.equals(null) || imei.equals("")) {
+                produktTemp.setImei(imei);
+            }
+            produktListTemp.add(produktTemp);
+            typ = "";
+            magazyn = "";
+            model = "";
+            imei = "";
+            marka = "";
+            ilosc = "";
 
-        produktTemp = new Produkt();
+            produktTemp = new Produkt();
         }
 
     }
@@ -268,6 +267,17 @@ public class ProduktController implements Serializable {
 
     public void setData(Date data) {
         this.data = data;
+    }
+
+    public String validationSelectSaleProduct() {
+
+        if (selectedProdukty.size() < 1) {
+            RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage("Komunikat","Wybierz produkty, które chcesz sprzedać!"));
+            return "";
+        } else {
+            return "sprzedaz";
+        }
+
     }
 
 }

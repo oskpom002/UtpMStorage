@@ -13,11 +13,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -60,17 +58,29 @@ public class Klient implements Serializable {
     @Column(name = "adres")
     private String adres;
 
-    @ManyToMany
-    @JoinTable(
-            name = "zakupione_produkty",
-            joinColumns = {
-                @JoinColumn(name = "id_klienta")},
-            inverseJoinColumns = {
-                @JoinColumn(name = "id_produktu")}
-    )
-    private List<Produkt> produkty;
+    @OneToMany(mappedBy = "klient")
+    private List<Sprzedaz> sprzedaze;
+    
+    
+//    @ManyToMany
+//    @JoinTable(
+//            name = "zakupione_produkty",
+//            joinColumns = {
+//                @JoinColumn(name = "id_klienta")},
+//            inverseJoinColumns = {
+//                @JoinColumn(name = "id_produktu")}
+//    )
+//    private List<Produkt> produkty;
 
     public Klient() {
+    }
+
+    public List<Sprzedaz> getSprzedaze() {
+        return sprzedaze;
+    }
+
+    public void setSprzedaze(List<Sprzedaz> sprzedaze) {
+        this.sprzedaze = sprzedaze;
     }
 
     public String getAdres() {
@@ -105,13 +115,13 @@ public class Klient implements Serializable {
         this.nazwisko = nazwisko;
     }
 
-    public List<Produkt> getProdukty() {
-        return produkty;
-    }
-
-    public void setProdukty(List<Produkt> produkty) {
-        this.produkty = produkty;
-    }
+//    public List<Produkt> getProdukty() {
+//        return produkty;
+//    }
+//
+//    public void setProdukty(List<Produkt> produkty) {
+//        this.produkty = produkty;
+//    }
 
     public Long getKid() {
         return kid;

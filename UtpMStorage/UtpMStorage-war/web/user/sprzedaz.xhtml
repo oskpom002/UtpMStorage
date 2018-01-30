@@ -19,11 +19,78 @@
                 <ui:define name="content">
                     <h:form>
 
+                        <p:panel id="przedmioty">
+                            <p:messages id="msgs" />
+
+                            <h1><h:outputText value="Sprzedawane produkty:"/></h1>
+                            <p:dataTable value="#{produktController.selectedProdukty}" var="item">
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Ilosc"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.ilosc}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Imei"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.imei}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Magazyn"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.magazyn}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Marka"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.marka}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Model"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.model}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Stan"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.stan}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Typ"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.typ}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Cena"/>
+                                    </f:facet>
+                                    <p:inputText  value="#{sprzedazController.quantities[item]}" validatorMessage="Niepoprawnie wprowadzona kwota! " label="Cena" required="true"  requiredMessage="Pole ceny jest wymagane!">
+                                        <p:ajax update="cena" event="keyup" />
+                                        <f:validateRegex  pattern="^[-+]?[0-9]*\.?[0-9]{1,2}+$" />
+                                    </p:inputText>
+                                    <p:message for="cena" id="cena" display="icon" />
+                                </p:column>
+
+
+                            </p:dataTable>
+
+
+                        </p:panel>
+
                         <p:panel id="panel" header="Spis klientów" style="margin-bottom:10px;width: 700px;">
 
-
                             <p:dataTable id="singleDT" var="car" value="#{klientController.findAll()}" selectionMode="single" selection="#{klientController.selectedKlient}" rowKey="#{car.kid}">
-                        
+
+                                <f:facet name="header">
+                                    Proszę wybrać klienta:
+                                </f:facet>
 
                                 <p:column headerText="Naziwsko">
                                     <h:outputText value="#{car.nazwisko}" />
@@ -39,14 +106,17 @@
                                 </p:column>
 
 
-                              
                             </p:dataTable>
-                            
-                              <p:commandButton value="Sprzedaj" action="#{klientController.wykonajsprzedaz(produktController.selectedProdukty)}" />
+
+                            <p:commandButton value="Sprzedaj"  update="przedmioty" action="#{sprzedazController.sprzedaz(klientController.selectedKlient, produktController.selectedProdukty)}" />                               
+
                         </p:panel>
+
+
+
+
+
                     </h:form>
-
-
 
                 </ui:define>
             </ui:composition>

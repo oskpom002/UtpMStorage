@@ -6,7 +6,6 @@
 package Controller;
 
 import entity.Klient;
-import entity.Produkt;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -68,14 +67,14 @@ public class KlientController implements Serializable {
         return selectedKlient;
     }
     
-    public String wykonajsprzedaz(List<Produkt> produkty)
-    {
-        
-        selectedKlient.setProdukty(produkty);
-        
-        this.klientFacade.edit(selectedKlient);
- 
-        return "index";
-    }
+//    public String wykonajsprzedaz(List<Produkt> produkty)
+//    {
+//        
+//        selectedKlient.setProdukty(produkty);
+//        
+//        this.klientFacade.edit(selectedKlient);
+// 
+//        return "index";
+//    }
 
 }
