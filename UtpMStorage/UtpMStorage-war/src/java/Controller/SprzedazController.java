@@ -82,7 +82,18 @@ public class SprzedazController implements Serializable {
             
             sprzedazFacade.create(sprzedaz);
            
-          //  produktFacade.edit(produkt);
+            int ilosc= produkt.getIlosc()-1;
+            if (ilosc<=0)
+            {
+                produkt.setIlosc(0);
+                produkt.setStan(Boolean.FALSE);
+            }
+            else
+            {
+                produkt.setIlosc(ilosc);
+            }
+            
+            produktFacade.edit(produkt);
             //System.out.println("PETLA");   
         }
 
