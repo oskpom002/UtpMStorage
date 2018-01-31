@@ -102,11 +102,14 @@ public class ProduktController implements Serializable {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole typ nie może być puste"));
         } else {
             produktTemp = new Produkt();
+            produktTemp.setStan(Boolean.TRUE);
             produktTemp.setTyp(typ);
             produktTemp.setMagazyn(magazyn);
             produktTemp.setModel(model);
             produktTemp.setMarka(marka);
             produktTemp.setIlosc(Integer.valueOf(ilosc));
+            produktTemp.setAktualnailosc(Integer.valueOf(ilosc));
+
             if (!imei.equals(null) || imei.equals("")) {
                 produktTemp.setImei(imei);
             }
@@ -261,6 +264,14 @@ public class ProduktController implements Serializable {
         return this.customeProductFacade.findProduktByDostawa(data);
     }
 
+//    public List<Produkt> findProduktByDataDostwawy(boolean b) {
+//        if (b) {
+//            return this.produktFacade.findAll();
+//        } else {
+//            return this.customeProductFacade.findProduktByDostawa(data);
+//        }
+//    }
+
     public Date getData() {
         return data;
     }
@@ -269,10 +280,14 @@ public class ProduktController implements Serializable {
         this.data = data;
     }
 
+    public List<Produkt> findProduktByStan(boolean b) {
+        return this.customeProductFacade.findProduktByStan(b);
+    }
+
     public String validationSelectSaleProduct() {
 
         if (selectedProdukty.size() < 1) {
-            RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage("Komunikat","Wybierz produkty, które chcesz sprzedać!"));
+            RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage("Komunikat", "Wybierz produkty, które chcesz sprzedać!"));
             return "";
         } else {
             return "sprzedaz";

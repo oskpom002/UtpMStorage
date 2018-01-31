@@ -18,22 +18,40 @@
                 <ui:define name="title">Strona główna</ui:define>
                 <ui:define name="content">
                     <h:form>
-                        <p:panel id="panel" header="Dodaj klienta" style="margin-bottom:10px;width: 700px;">
+                        <p:panel id="klient" header="Dodaj klienta" style="margin-bottom:10px;width: 700px;">
+                            <p:messages id="msgs" />
+                            <p:message for="cena" id="cena" display="icon" />
+
+
 
                             <p:panelGrid columns="2" columnClasses="forty-percent top-alignment, sixty-percent top-alignment" style="width:100%;"  styleClass="ui-noborder">   
                                 <p:outputLabel value="Imie:" for="imie" />
-                                <p:inputText id="imie" value="#{klientController.klientTemp.imie}" title="Imie" />
+                                <p:inputText id="imie" value="#{klientController.klientTemp.imie}" title="Imie" required="true" validatorMessage="Niepoprawnie wprowadzone imie! " requiredMessage="Pole imie jest wymagane!" >
+                                    <p:ajax update="cena" event="keyup" />
+                                    
+                                </p:inputText>
+
                                 <p:outputLabel value="Nazwisko:" for="nazwisko" />
-                                <p:inputText id="nazwisko" value="#{klientController.klientTemp.nazwisko}" title="Nazwisko" />
+                                <p:inputText id="nazwisko" value="#{klientController.klientTemp.nazwisko}" title="Nazwisko" required="true" validatorMessage="Niepoprawnie wprowadzone nazwisko! " requiredMessage="Pole nazwisko jest wymagane!"  >
+                                    <p:ajax update="cena" event="keyup" />
+                                </p:inputText>
+
+
                                 <p:outputLabel value="Adres:" for="adres" />
-                                <p:inputText id="adres" value="#{klientController.klientTemp.adres}" title="Adres" />
+                                <p:inputText id="adres" value="#{klientController.klientTemp.adres}" title="Adres" required="true"   validatorMessage="Niepoprawnie wprowadzony adres! " requiredMessage="Pole adres jest wymagane!" >
+                                    <p:ajax update="cena" event="keyup" />
+                                </p:inputText>
+
+
                                 <p:outputLabel value="Kontakt:" for="kontakt" />
-                                <p:inputText id="kontakt" value="#{klientController.klientTemp.kontakt}" title="Kontakt" />
+                                <p:inputText id="kontakt" value="#{klientController.klientTemp.kontakt}" title="Kontakt" required="true"  validatorMessage="Niepoprawnie wprowadzony kontakt! " requiredMessage="Pole kontakt jest wymagane!"  >
+                                    <p:ajax update="cena" event="keyup" />
+                                </p:inputText>
 
 
 
-                                <p:commandButton value="Dodaj" action="#{klientController.addKlient()}" />
-                                </p:panelGrid>
+                                <p:commandButton value="Dodaj"  update="klient" action="#{klientController.addKlient()}" />
+                            </p:panelGrid>
                         </p:panel>
                     </h:form>
 

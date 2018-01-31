@@ -14,11 +14,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -52,6 +50,11 @@ public class Produkt implements Serializable {
 
     @Column(name = "ilosc")
     private Integer ilosc;
+
+    
+    @Column(name = "aktualnailosc")
+    private Integer aktualnailosc;
+    
     @Size(max = 255)
     @Column(name = "imei")
     private String imei;
@@ -69,9 +72,6 @@ public class Produkt implements Serializable {
     @Size(max = 255)
     @Column(name = "typ")
     private String typ;
-
-//    @ManyToMany(mappedBy = "produkty")
-//    private List<Klient> klienci;
 
     @ManyToMany(mappedBy = "produkty")
     private List<Dostawa> dostawy;
@@ -103,18 +103,20 @@ public class Produkt implements Serializable {
         this.dostawy = dostawy;
     }
 
-//    public List<Klient> getKlienci() {
-//        return klienci;
-//    }
-//
-//    public void setKlienci(List<Klient> klienci) {
-//        this.klienci = klienci;
-//    }
-
     public Produkt(Integer pid) {
         this.pid = pid;
     }
 
+    
+    public Integer getAktualnailosc() {
+        return aktualnailosc;
+    }
+
+    public void setAktualnailosc(Integer aktualnailosc) {
+        this.aktualnailosc = aktualnailosc;
+    }
+
+    
     public Integer getPid() {
         return pid;
     }

@@ -110,4 +110,13 @@ public class CustomeProductFacade {
                 .setParameter("data", data)
                 .getResultList();
     }
+    
+    public List<Produkt> findProduktByStan(boolean b) {
+        return em.createQuery("SELECT p FROM Produkt p WHERE p.stan = :b")
+                .setParameter("b", b)
+                .getResultList();
+    }
+    
+    
+    
 }
