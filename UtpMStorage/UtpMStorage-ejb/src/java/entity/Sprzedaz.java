@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -52,6 +53,17 @@ public class Sprzedaz implements Serializable {
     @ManyToOne
     private Klient klient;
 
+    @OneToOne
+    private Serwis serwis;
+
+    public Serwis getSerwis() {
+        return serwis;
+    }
+
+    public void setSerwis(Serwis serwis) {
+        this.serwis = serwis;
+    }
+
     public Integer getSis() {
         return sis;
     }
@@ -67,7 +79,6 @@ public class Sprzedaz implements Serializable {
     public void setCena(String cena) {
         this.cena = cena;
     }
-
 
     public Klient getKlient() {
         return klient;

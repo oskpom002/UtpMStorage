@@ -63,7 +63,7 @@ public class SprzedazController implements Serializable {
         
         if (klient == null) {           
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-                FacesMessage.SEVERITY_ERROR, "Wybierz klienta! ", "Wybierz klienta!"));
+                FacesMessage.SEVERITY_ERROR, "Wybierz klienta!", "Wybierz klienta!"));
             return "";
         }
         

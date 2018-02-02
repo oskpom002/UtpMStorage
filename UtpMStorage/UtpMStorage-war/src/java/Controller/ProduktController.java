@@ -195,6 +195,8 @@ public class ProduktController implements Serializable {
     public String validationSelectSaleProduct() {
 
         if (selectedProdukty.size() < 1) {
+//              FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+//                    FacesMessage.SEVERITY_ERROR, "Wybierz produkty, które chcesz sprzedać!", "Wybierz produkty, które chcesz sprzedać!"));
             RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage("Komunikat", "Wybierz produkty, które chcesz sprzedać!"));
             return "";
         } else {

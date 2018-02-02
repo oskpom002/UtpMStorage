@@ -28,9 +28,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "klient")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Klient.findAll", query = "SELECT k FROM Klient k")  
+    @NamedQuery(name = "Klient.findAll", query = "SELECT k FROM Klient k")
     , @NamedQuery(name = "Klient.findByKid", query = "SELECT k FROM Klient k WHERE k.kid = :kid")
- 
+
 })
 public class Klient implements Serializable {
 
@@ -60,19 +60,19 @@ public class Klient implements Serializable {
 
     @OneToMany(mappedBy = "klient")
     private List<Sprzedaz> sprzedaze;
-    
-    
-//    @ManyToMany
-//    @JoinTable(
-//            name = "zakupione_produkty",
-//            joinColumns = {
-//                @JoinColumn(name = "id_klienta")},
-//            inverseJoinColumns = {
-//                @JoinColumn(name = "id_produktu")}
-//    )
-//    private List<Produkt> produkty;
+
+    @OneToMany(mappedBy = "klient")
+    private List<Serwis> serwises;
 
     public Klient() {
+    }
+
+    public List<Serwis> getSerwises() {
+        return serwises;
+    }
+
+    public void setSerwises(List<Serwis> serwises) {
+        this.serwises = serwises;
     }
 
     public List<Sprzedaz> getSprzedaze() {
@@ -114,14 +114,6 @@ public class Klient implements Serializable {
     public void setNazwisko(String nazwisko) {
         this.nazwisko = nazwisko;
     }
-
-//    public List<Produkt> getProdukty() {
-//        return produkty;
-//    }
-//
-//    public void setProdukty(List<Produkt> produkty) {
-//        this.produkty = produkty;
-//    }
 
     public Long getKid() {
         return kid;

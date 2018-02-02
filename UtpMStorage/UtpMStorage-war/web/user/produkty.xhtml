@@ -14,105 +14,108 @@
             <ui:composition template="/template/template.xhtml">
                 <ui:define name="title">Produkty</ui:define>
                 <ui:define name="content">
-<h:form id="form">
-    <p:growl id="msgs" showDetail="true" />
-    <p:dataTable id="basicDT" var="car" value="#{produktController.findProduktByStan(true)}" widgetVar="carsTable" multiViewState="true"
-                 rows="10" paginator="true"
-                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                 rowsPerPageTemplate="5,10,15"
-                 selection="#{produktController.selectedProdukty}" rowKey="#{car.pid}">
-     <!--<p:dataTable id="basicDT" var="car" value="#{produktController.findAll()}" widgetVar="carsTable" selection="#{produktController.selectedProdukty}" rowKey="#{car.pid}">-->
-        <f:facet name="header">
-            Produkty
-        </f:facet>
-            <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
-        <p:column headerText="Magazyn" filterBy="#{car.magazyn}" sortBy="#{car.magazyn}" filterMatchMode="exact">
-            <f:facet name="filter">
-                <p:selectOneMenu onchange="PF('carsTable').filter()" style="width:100px;" >
-                    <f:selectItem itemLabel="Wszystkie" itemValue="#{null}" noSelectionOption="true" />
-                    <f:selectItems value="#{produktController.findMagazyny()}" />
-                </p:selectOneMenu>
-            </f:facet>
-            <h:outputText value="#{car.magazyn}" />
-        </p:column>
-        <p:column headerText="Typ" filterBy="#{car.typ}" sortBy="#{car.typ}" filterMatchMode="exact">
-            <f:facet name="filter">
-                <p:selectOneMenu onchange="PF('carsTable').filter()" style="width:100px;" >
-                    <f:selectItem itemLabel="Wszystkie" itemValue="#{null}" noSelectionOption="true" />
-                    <f:selectItems value="#{produktController.findTypes()}" />
-                </p:selectOneMenu>
-            </f:facet>
-            <h:outputText value="#{car.typ}" />
-        </p:column>
-        <p:column headerText="Marka" filterBy="#{car.marka}" sortBy="#{car.marka}" filterMatchMode="exact">
-            <f:facet name="filter">
-                <p:selectOneMenu onchange="PF('carsTable').filter()" style="width:100px;" >
-                    <f:selectItem itemLabel="Wszystkie" itemValue="#{null}" noSelectionOption="true" />
-                    <f:selectItems value="#{produktController.findMarki()}" />
-                </p:selectOneMenu>
-            </f:facet>
-            <h:outputText value="#{car.marka}" />
-        </p:column>
-        <p:column headerText="Model" filterBy="#{car.model}" sortBy="#{car.model}" filterMatchMode="exact">
-            <f:facet name="filter">
-                <p:selectOneMenu onchange="PF('carsTable').filter()" style="width:100px;" >
-                    <f:selectItem itemLabel="Wszystkie" itemValue="#{null}" noSelectionOption="true" />
-                    <f:selectItems value="#{produktController.findModele()}" />
-                </p:selectOneMenu>
-            </f:facet>
-            <h:outputText value="#{car.model}" />
-        </p:column>
-        <p:column headerText="Ilość:">
-            <h:outputText value="#{car.aktualnailosc}" />
-        </p:column>
-        <p:column style="width:32px;text-align: center">
-             <p:commandButton update="aa" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="Szczegóły">
-                 <f:setPropertyActionListener value="#{car}" target="#{produktController.selectedProduct}" />
-            </p:commandButton>
-        </p:column>
-         <f:facet name="footer">
-             <p:commandButton process="basicDT" update="" icon="" value="Sprzedaj" action="#{produktController.validationSelectSaleProduct()}" oncomplete="" />
-        </f:facet>
-    </p:dataTable>
- 
+                    <h:form id="form">
+                        <p:panel>
+                            <p:growl id="growl" sticky="true" /> 
 
- 
+                            <p:dataTable id="basicDT" var="car" value="#{produktController.findProduktByStan(true)}" widgetVar="carsTable" multiViewState="true"
+                                         rows="10" paginator="true"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="5,10,15"
+                                         selection="#{produktController.selectedProdukty}" rowKey="#{car.pid}">
+                             <!--<p:dataTable id="basicDT" var="car" value="#{produktController.findAll()}" widgetVar="carsTable" selection="#{produktController.selectedProdukty}" rowKey="#{car.pid}">-->
+                                <f:facet name="header">
+                                    Produkty
+                                </f:facet>
+                                <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                                <p:column headerText="Magazyn" filterBy="#{car.magazyn}" sortBy="#{car.magazyn}" filterMatchMode="exact">
+                                    <f:facet name="filter">
+                                        <p:selectOneMenu onchange="PF('carsTable').filter()" style="width:100px;" >
+                                            <f:selectItem itemLabel="Wszystkie" itemValue="#{null}" noSelectionOption="true" />
+                                            <f:selectItems value="#{produktController.findMagazyny()}" />
+                                        </p:selectOneMenu>
+                                    </f:facet>
+                                    <h:outputText value="#{car.magazyn}" />
+                                </p:column>
+                                <p:column headerText="Typ" filterBy="#{car.typ}" sortBy="#{car.typ}" filterMatchMode="exact">
+                                    <f:facet name="filter">
+                                        <p:selectOneMenu onchange="PF('carsTable').filter()" style="width:100px;" >
+                                            <f:selectItem itemLabel="Wszystkie" itemValue="#{null}" noSelectionOption="true" />
+                                            <f:selectItems value="#{produktController.findTypes()}" />
+                                        </p:selectOneMenu>
+                                    </f:facet>
+                                    <h:outputText value="#{car.typ}" />
+                                </p:column>
+                                <p:column headerText="Marka" filterBy="#{car.marka}" sortBy="#{car.marka}" filterMatchMode="exact">
+                                    <f:facet name="filter">
+                                        <p:selectOneMenu onchange="PF('carsTable').filter()" style="width:100px;" >
+                                            <f:selectItem itemLabel="Wszystkie" itemValue="#{null}" noSelectionOption="true" />
+                                            <f:selectItems value="#{produktController.findMarki()}" />
+                                        </p:selectOneMenu>
+                                    </f:facet>
+                                    <h:outputText value="#{car.marka}" />
+                                </p:column>
+                                <p:column headerText="Model" filterBy="#{car.model}" sortBy="#{car.model}" filterMatchMode="exact">
+                                    <f:facet name="filter">
+                                        <p:selectOneMenu onchange="PF('carsTable').filter()" style="width:100px;" >
+                                            <f:selectItem itemLabel="Wszystkie" itemValue="#{null}" noSelectionOption="true" />
+                                            <f:selectItems value="#{produktController.findModele()}" />
+                                        </p:selectOneMenu>
+                                    </f:facet>
+                                    <h:outputText value="#{car.model}" />
+                                </p:column>
+                                <p:column headerText="Ilość:">
+                                    <h:outputText value="#{car.aktualnailosc}" />
+                                </p:column>
+                                <p:column style="width:32px;text-align: center">
+                                    <p:commandButton update="aa" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="Szczegóły">
+                                        <f:setPropertyActionListener value="#{car}" target="#{produktController.selectedProduct}" />
+                                    </p:commandButton>
+                                </p:column>
+                                <f:facet name="footer">
+                                    <p:commandButton process="basicDT" update="" icon="" value="Sprzedaj" action="#{produktController.validationSelectSaleProduct()}" oncomplete="" />
+                                </f:facet>
+                            </p:dataTable>
 
- 
 
- 
-    
- 
 
-    <h:form id="form">
-    <p:dialog header="Szczegóły" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-        <p:outputPanel  id="carDetail" style="text-align:center;" autoUpdate="true">
-            <p:panelGrid id="aa"  columns="2" columnClasses="label,value">
-                <f:facet name="header">
-                    <h:outputText value="Szczegóły wybranego produktu:" />
-                </f:facet>
- 
-                <h:outputText value="Marka" />
-                <h:outputText value="#{produktController.selectedProduct.marka}" />
- 
-                <h:outputText value="Model:" />
-                <h:outputText value="#{produktController.selectedProduct.model}" />
- 
-                <h:outputText value="Imei:" />
-                <h:outputText value="#{produktController.selectedProduct.imei}"/>
- 
-                <h:outputText value="Stan:" />
-                <h:outputText value="#{produktController.selectedProduct.stan}" />
-                
-                <h:outputText value="Magazyn:" />
-                <h:outputText value="#{produktController.selectedProduct.magazyn}" />
-            </p:panelGrid>
-        </p:outputPanel>
-    </p:dialog>
-    </h:form>
-</h:form>
 
-                     
+
+
+
+
+
+
+                            <h:form id="form">
+                                <p:dialog header="Szczegóły" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                                    <p:outputPanel  id="carDetail" style="text-align:center;" autoUpdate="true">
+                                        <p:panelGrid id="aa"  columns="2" columnClasses="label,value">
+                                            <f:facet name="header">
+                                                <h:outputText value="Szczegóły wybranego produktu:" />
+                                            </f:facet>
+
+                                            <h:outputText value="Marka" />
+                                            <h:outputText value="#{produktController.selectedProduct.marka}" />
+
+                                            <h:outputText value="Model:" />
+                                            <h:outputText value="#{produktController.selectedProduct.model}" />
+
+                                            <h:outputText value="Imei:" />
+                                            <h:outputText value="#{produktController.selectedProduct.imei}"/>
+
+                                            <h:outputText value="Stan:" />
+                                            <h:outputText value="#{produktController.selectedProduct.stan}" />
+
+                                            <h:outputText value="Magazyn:" />
+                                            <h:outputText value="#{produktController.selectedProduct.magazyn}" />
+                                        </p:panelGrid>
+                                    </p:outputPanel>
+                                </p:dialog>
+                            </h:form>
+                        </p:panel>
+                    </h:form>
+
+
                 </ui:define>
             </ui:composition>
         </h:body>

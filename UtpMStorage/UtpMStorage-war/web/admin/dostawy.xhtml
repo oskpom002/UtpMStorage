@@ -9,7 +9,7 @@
     <f:view>
 
         <h:head>
-            <title>Strona główna</title>
+            <title>Dostawy</title>
         </h:head>        
 
         <h:body>
@@ -17,83 +17,94 @@
             <ui:composition template="/template/template.xhtml">
                 <ui:define name="title">Strona główna</ui:define>
                 <ui:define name="content">
+                    
+                    
                     <h:form>
-                        <p:growl id="msgs" showDetail="true" sticky="true" autoUpdate="true"/>
+                        <p:growl id="msgs"  sticky="true" autoUpdate="true"/>
                         <p:panel id="dost" header="Dostawy">
-                            <p:panelGrid columns="2" >
-                                <p:panel id="panel" header="Dodaj produkt" style="margin-bottom:10px;width: 500px;">
+                            
+                            <p:panelGrid columns="2" styleClass="ui-noborder" >
 
-                                    <p:panelGrid id="panelGrid1" columns="2" columnClasses="forty-percent top-alignment, sixty-percent top-alignment" style="width:100%;" layout="grid" styleClass="ui-noborder">                          
+                                <p:row>
+                                    <p:column>
+                                        <p:panel id="panel" header="Dodaj produkt" />
 
-                                        <p:outputLabel value="Ilosc:" for="ilosc" />
-                                        <p:inputText id="ilosc" value="#{produktController.ilosc}" title="Ilosc"/>
-                                        <p:outputLabel value="Imei:" for="imei" />
-                                        <p:inputText id="imei" value="#{produktController.imei}" title="Imei" />
-                                        <p:outputLabel value="Magazyn:" for="magazyn" />
-                                        <p:inputText id="magazyn" value="#{produktController.magazyn}" title="Magazyn"/>
-                                        <p:outputLabel value="Marka:" for="marka" />
-                                        <p:inputText id="marka" value="#{produktController.marka}" title="Marka" />
-                                        <p:outputLabel value="Model:" for="model" />
-                                        <p:inputText id="model" value="#{produktController.model}" title="Model"/>
-                                        <p:outputLabel value="Typ:" for="typ" />
-                                        <p:inputText id="typ" value="#{produktController.typ}" title="Typ"/>                                    
+                                        <p:panelGrid id="panelGrid1" columns="2" columnClasses="forty-percent top-alignment, sixty-percent top-alignment" style="width:100%;" styleClass="ui-noborder">                          
 
-                                    </p:panelGrid>
-                                    <p:calendar id="dcData" value="#{produktController.dostawaTemp.dataZamowienia}" mode="dcData" />
+                                            <p:outputLabel value="Ilosc:" for="ilosc" />
+                                            <p:inputText id="ilosc" value="#{produktController.ilosc}" title="Ilosc"/>
+                                            <p:outputLabel value="Imei:" for="imei" />
+                                            <p:inputText id="imei" value="#{produktController.imei}" title="Imei" />
+                                            <p:outputLabel value="Magazyn:" for="magazyn" />
+                                            <p:inputText id="magazyn" value="#{produktController.magazyn}" title="Magazyn"/>
+                                            <p:outputLabel value="Marka:" for="marka" />
+                                            <p:inputText id="marka" value="#{produktController.marka}" title="Marka" />
+                                            <p:outputLabel value="Model:" for="model" />
+                                            <p:inputText id="model" value="#{produktController.model}" title="Model"/>
+                                            <p:outputLabel value="Typ:" for="typ" />
+                                            <p:inputText id="typ" value="#{produktController.typ}" title="Typ"/>                                    
 
-                                    <p:commandButton value="Dodaj" action="#{produktController.add()}" ajax="true" update="produktyTabel"   >    
-                                        <f:ajax execute="@this" render="panelGrid1"/>
-                                    </p:commandButton>
+                                        </p:panelGrid>
+                                        <p:calendar id="dcData" value="#{produktController.dostawaTemp.dataZamowienia}" mode="dcData" style="vertical-align: central"/>
 
-
-                                </p:panel>
-                                <p:panel id="paneltab" header="Lista produktów:" style="margin-bottom:10px;width: 700px;">
-
-                                    <p:dataTable id="produktyTabel" value="#{produktController.produktListTemp}" var="item">
-                                        <p:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Ilosc"/>
-                                            </f:facet>
-                                            <h:outputText value="#{item.ilosc}"/>
-                                        </p:column>
-                                        <p:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Imei"/>
-                                            </f:facet>
-                                            <h:outputText value="#{item.imei}"/>
-                                        </p:column>
-                                        <p:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Magazyn"/>
-                                            </f:facet>
-                                            <h:outputText value="#{item.magazyn}"/>
-                                        </p:column>
-                                        <p:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Marka"/>
-                                            </f:facet>
-                                            <h:outputText value="#{item.marka}"/>
-                                        </p:column>
-                                        <p:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Model"/>
-                                            </f:facet>
-                                            <h:outputText value="#{item.model}"/>
-                                        </p:column>
-
-                                        <p:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Typ"/>
-                                            </f:facet>
-                                            <h:outputText value="#{item.typ}"/>
-                                        </p:column>
-                                    </p:dataTable>
+                                        <p:commandButton value="Dodaj" action="#{produktController.add()}" ajax="true" update="produktyTabel"   >    
+                                            <f:ajax execute="@this" render="panelGrid1"/>
+                                        </p:commandButton>
 
 
-                                    <p:commandButton value="Dodaj dane do bazy danych" action="#{produktController.addToDataBase()}" ajax="true" update="produktyTabel"  >
-                                    </p:commandButton>
 
-                                </p:panel>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column style=" vertical-align: top;">
+                                        <p:panel id="paneltab" header="Lista produktów:" />
+
+                                        <p:dataTable id="produktyTabel" value="#{produktController.produktListTemp}" var="item">
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Ilosc"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.ilosc}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Imei"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.imei}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Magazyn"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.magazyn}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Marka"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.marka}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Model"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.model}"/>
+                                            </p:column>
+
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Typ"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.typ}"/>
+                                            </p:column>
+                                        </p:dataTable>
+
+
+                                        <p:commandButton value="Dodaj dane do bazy danych" action="#{produktController.addToDataBase()}" ajax="true" update="produktyTabel"  >
+                                        </p:commandButton>
+
+                                    </p:column>
+                                </p:row>
 
                             </p:panelGrid>
                         </p:panel>

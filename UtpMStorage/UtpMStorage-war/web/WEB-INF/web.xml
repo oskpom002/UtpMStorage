@@ -79,4 +79,15 @@
         <ejb-ref-type>Session</ejb-ref-type>
         <local>service.CustomeProductFacade</local>
     </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>SprzedazFacade</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>service.SprzedazFacade</local>
+    </ejb-local-ref>
+   
+    <ejb-local-ref>
+        <ejb-ref-name>SerwisFacade</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>service.SerwisFacade</local>
+    </ejb-local-ref>
 </web-app>

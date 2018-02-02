@@ -17,92 +17,95 @@
             <ui:composition template="/template/template.xhtml">
                 <ui:define name="title">Strona główna</ui:define>
                 <ui:define name="content">
+
+
                     <h:form id="form">
                         <!--<p:growl id="growl" showDetail="true" sticky="true" />--> 
 
-
                         <p:panel id="strona">
-                            <p:panelGrid columns="2" columnClasses="forty-percent top-alignment, sixty-percent top-alignment" style="width:100%;" layout="grid" styleClass="ui-noborder">
-                                <p:panel id="datapanel" header="Wybierz datę :" style="margin-bottom:10px;width: 350px;">
-                                    <p:calendar id="event" value="#{dostawaController.data}" mode="dcData" > 
-                                        <p:ajax event="dateSelect" listener="#{dostawaController.findProduktByDataDostawy(false)}" update="produktyTabele"  />
 
-                                    </p:calendar>
+                            <p:panelGrid columns="2" styleClass="ui-noborder">
+                                <p:row>
+                                    <p:column>
+                                        <p:panel id="datapanel" header="Wybierz datę :" style="margin-bottom:10px;width: 350px;"/>
 
-                                    <p:commandButton value="Pokaż wszystkie" >
-                                        <p:ajax listener="#{dostawaController.findProduktByDataDostawy(true)}" update="produktyTabele"  />
-                                    </p:commandButton>
+                                        <p:calendar id="event" value="#{dostawaController.data}" mode="dcData" > 
+                                            <p:ajax event="dateSelect" listener="#{dostawaController.findProduktByDataDostawy(false)}" update="produktyTabele"  />
+                                        </p:calendar>
 
+                                        <p:commandButton value="Pokaż wszystkie" >
+                                            <p:ajax listener="#{dostawaController.findProduktByDataDostawy(true)}" update="produktyTabele"  />
+                                        </p:commandButton>
 
-                                </p:panel> 
-                                <p:panel id="tablepanel" header="Dostawy z dnia:" style="margin-bottom:10px;width: 800px;">
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column style=" vertical-align: top;">
 
+                                        <p:panel id="tablepanel" header="Dostawy z dnia:" />
 
-                                    <p:dataTable id="produktyTabele" widgetVar="produktyTabele" editable="true" value="#{dostawaController.produktListTempDostawy}" var="item">
+                                        <p:dataTable id="produktyTabele" widgetVar="produktyTabele" editable="true" value="#{dostawaController.produktListTempDostawy}" var="item">
 
-                                        <p:ajax event="rowEdit" listener="#{dostawaController.onRowEdit}"  />
-                                        <p:ajax event="rowEditCancel" listener="#{dostawaController.onRowCancel}"  />
+                                            <p:ajax event="rowEdit" listener="#{dostawaController.onRowEdit}"  />
+                                            <p:ajax event="rowEditCancel" listener="#{dostawaController.onRowCancel}"  />
 
+                                            <p:column headerText="Marka">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"> <h:outputText value="#{item.marka}" /> </f:facet>
+                                                    <f:facet name="input"> <p:inputText  value="#{item.marka}" /></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
 
-                                        <p:column headerText="Marka">
-                                            <p:cellEditor>
-                                                <f:facet name="output"> <h:outputText value="#{item.marka}" /> </f:facet>
-                                                <f:facet name="input"> <p:inputText  value="#{item.marka}" /></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
+                                            <p:column headerText="Model">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"> <h:outputText value="#{item.model}" /> </f:facet>
+                                                    <f:facet name="input"> <p:inputText   value="#{item.model}" /></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
 
-                                        <p:column headerText="Model">
-                                            <p:cellEditor>
-                                                <f:facet name="output"> <h:outputText value="#{item.model}" /> </f:facet>
-                                                <f:facet name="input"> <p:inputText   value="#{item.model}" /></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
+                                            <p:column headerText="Typ">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"> <h:outputText value="#{item.typ}" /> </f:facet>
+                                                    <f:facet name="input"> <p:inputText   value="#{item.typ}" /></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
 
-                                        <p:column headerText="Typ">
-                                            <p:cellEditor>
-                                                <f:facet name="output"> <h:outputText value="#{item.typ}" /> </f:facet>
-                                                <f:facet name="input"> <p:inputText   value="#{item.typ}" /></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
+                                            <p:column headerText="Ilość podczas dostawy">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"> <h:outputText value="#{item.ilosc}" /> </f:facet>
+                                                    <f:facet name="input"> <p:inputText   value="#{item.ilosc}" /></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
 
-                                        <p:column headerText="Ilość podczas dostawy:">
-                                            <p:cellEditor>
-                                                <f:facet name="output"> <h:outputText value="#{item.ilosc}" /> </f:facet>
-                                                <f:facet name="input"> <p:inputText   value="#{item.ilosc}" /></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
+                                            <p:column headerText="Aktualna ilość">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"> <h:outputText value="#{item.aktualnailosc}" /> </f:facet>
+                                                    <f:facet name="input"> <p:inputText   value="#{item.aktualnailosc}" /></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
 
-                                        <p:column headerText="Aktualna ilość">
-                                            <p:cellEditor>
-                                                <f:facet name="output"> <h:outputText value="#{item.aktualnailosc}" /> </f:facet>
-                                                <f:facet name="input"> <p:inputText   value="#{item.aktualnailosc}" /></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
+                                            <p:column headerText="Magazyn">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"> <h:outputText value="#{item.magazyn}" /> </f:facet>
+                                                    <f:facet name="input"> <p:inputText   value="#{item.magazyn}" /></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
 
-                                        <p:column headerText="Magazyn">
-                                            <p:cellEditor>
-                                                <f:facet name="output"> <h:outputText value="#{item.magazyn}" /> </f:facet>
-                                                <f:facet name="input"> <p:inputText   value="#{item.magazyn}" /></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
+                                            <p:column headerText="Imei">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"> <h:outputText value="#{item.imei}" /> </f:facet>
+                                                    <f:facet name="input"> <p:inputText   value="#{item.imei}" /></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
 
-                                        <p:column headerText="Imei">
-                                            <p:cellEditor>
-                                                <f:facet name="output"> <h:outputText value="#{item.imei}" /> </f:facet>
-                                                <f:facet name="input"> <p:inputText   value="#{item.imei}" /></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
+                                            <p:column style="width:32px">
+                                                <p:rowEditor />
+                                            </p:column>
 
+                                        </p:dataTable>
+                                    </p:column>
+                                </p:row>
 
-                                        <p:column style="width:32px">
-                                            <p:rowEditor />
-                                        </p:column>
-
-
-
-                                    </p:dataTable>
-
-                                </p:panel>
                             </p:panelGrid>
                         </p:panel>
                     </h:form>
