@@ -39,14 +39,19 @@ public class SprzedazController implements Serializable {
 
     @EJB
     private ProduktFacade produktFacade;
+
     @EJB
     private SprzedazFacade sprzedazFacade;
 
     private Map<Produkt, String> quantities = new HashMap<>();
 
     private Sprzedaz sprzedaz;
+
     private List<Sprzedaz> sprzedazs = new ArrayList<Sprzedaz>();
-  //  private Date data = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+
+    private List<Sprzedaz> datasprzedazs = new ArrayList<Sprzedaz>();
+
+    private Date data = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
 
     public Map<Produkt, String> getQuantities() {
         return quantities;
@@ -71,7 +76,7 @@ public class SprzedazController implements Serializable {
             if (b) {
                 sprzedaz.setKlient(klient);
             }
-            
+
             sprzedaz.setProdukt(produkt);
             sprzedaz.setCena(quantity);
 
@@ -89,7 +94,7 @@ public class SprzedazController implements Serializable {
 
             produktFacade.edit(produkt);
         }
-        
+
         if (b) {
             klient.setSprzedaze(sprzedazs);
             klientFacade.edit(klient);
@@ -114,25 +119,38 @@ public class SprzedazController implements Serializable {
         this.klientFacade = klientFacade;
     }
 
-    public ProduktFacade getProduktFacade() {
-        return produktFacade;
+    public List<Sprzedaz> getDatasprzedazs() {
+        return datasprzedazs;
     }
 
-    public void setProduktFacade(ProduktFacade produktFacade) {
-        this.produktFacade = produktFacade;
+    public void setDatasprzedazs(List<Sprzedaz> datasprzedazs) {
+        this.datasprzedazs = datasprzedazs;
     }
+
 
     public List<Sprzedaz> findAll() {
         return this.sprzedazFacade.findAll();
     }
 
-    public SprzedazFacade getSprzedazFacade() {
-        return sprzedazFacade;
+    public Date getData() {
+        return data;
     }
 
-    public void setSprzedazFacade(SprzedazFacade sprzedazFacade) {
-        this.sprzedazFacade = sprzedazFacade;
+    public void setData(Date data) {
+        this.data = data;
+    }
 
+    public List<Sprzedaz> findSprzedazByData() {
+        return this.sprzedazFacade.findSprzedazByData(data);
+    }
+
+    public void findSprzedazByDataAll(boolean statusView) {
+
+        if (statusView) {
+            datasprzedazs = findAll();
+        } else {
+            datasprzedazs = findSprzedazByData();
+        }
     }
 
 }

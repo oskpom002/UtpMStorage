@@ -41,11 +41,21 @@ public class SerwisController implements Serializable {
     @EJB
     private MagazynFacade magazynFacade;
 
-    private Serwis serwis = new Serwis();
+    
+    //dodawanie urządzenia do serwisu
+    private Serwis serwis = new Serwis();   
+    
+    //wybrane urządzenie
     private Serwis selectedSerwis = new Serwis();
-    private Sprzedaz sprzedaz = new Sprzedaz();
-    private String infoTemp;
+    
+    //realizacja zwrotu
+    private Sprzedaz sprzedaz = new Sprzedaz();  
+    //private String infoTemp;
+    
+    //do wyświetlania serwisów
     private List<Serwis> serwisy = new ArrayList<Serwis>();
+    
+    //status przycisków
     private boolean showButtonNapraw;
     private boolean showButtonZwrocone;
 
@@ -69,13 +79,13 @@ public class SerwisController implements Serializable {
         return showButtonNapraw;
     }
 
-    public String getInfoTemp() {
-        return infoTemp;
-    }
-
-    public void setInfoTemp(String infoTemp) {
-        this.infoTemp = infoTemp;
-    }
+//    public String getInfoTemp() {
+//        return infoTemp;
+//    }
+//
+//    public void setInfoTemp(String infoTemp) {
+//        this.infoTemp = infoTemp;
+//    }
 
     public void setShowButtonNapraw(boolean showButtonNapraw) {
         this.showButtonNapraw = showButtonNapraw;

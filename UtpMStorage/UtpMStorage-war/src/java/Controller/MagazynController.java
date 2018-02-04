@@ -25,8 +25,8 @@ public class MagazynController implements Serializable {
     private MagazynFacade magazynFacade;
 
     private Magazyn selectedMagazyn;
-
-    private String test;
+  
+   //Do combobox przy wyborze magazynu
     private Integer magazynId;
 
     public MagazynController() {
@@ -43,14 +43,6 @@ public class MagazynController implements Serializable {
 
     public void setMagazynFacade(MagazynFacade magazynFacade) {
         this.magazynFacade = magazynFacade;
-    }
-
-    public String getTest() {
-        return test;
-    }
-
-    public void setTest(String test) {
-        this.test = test;
     }
 
     public Magazyn getSelectedMagazyn() {

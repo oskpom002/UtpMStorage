@@ -39,7 +39,7 @@ public class DostawaController implements Serializable {
     @EJB
     private CustomeProductFacade customeProductFacade;
 
-    private Dostawa selectedDostawa;
+    //private Dostawa selectedDostawa;
 
     //do edycji dostaw
     private List<Produkt> produktListTempDostawy = new ArrayList<Produkt>();
@@ -60,9 +60,9 @@ public class DostawaController implements Serializable {
         this.statusViewProdukt = statusViewProdukt;
     }
 
-    public void setSelectedDostawa(Dostawa selectedDostawa) {
-        this.selectedDostawa = selectedDostawa;
-    }
+//    public void setSelectedDostawa(Dostawa selectedDostawa) {
+//        this.selectedDostawa = selectedDostawa;
+//    }
 
     public List<Dostawa> findAll() {
         return this.dostawaFacade.findAll();
