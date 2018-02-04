@@ -6,6 +6,7 @@
 package service;
 
 import entity.Serwis;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,12 @@ public class SerwisFacade extends AbstractFacade<Serwis> {
 
     public SerwisFacade() {
         super(Serwis.class);
+    }
+    
+      public List<Serwis> findProduktByStatus(String status) {
+        return em.createQuery("SELECT s FROM Serwis s WHERE s.status = :status")
+                .setParameter("status", status)
+                .getResultList();
     }
     
 }

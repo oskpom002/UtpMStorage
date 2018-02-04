@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view>
+
+        <h:head>
+            <title>Obsługa serwisu</title>
+        </h:head>        
+
+        <h:body>
+            <h:outputStylesheet name="css/style.css" />
+            <ui:composition template="/template/template.xhtml">
+                <ui:define name="title">Strona główna</ui:define>
+                <ui:define name="content">
+                    <h:form>
+                        <p:panel>
+                            <!--<p:growl id="growl" sticky="true" />--> 
+
+                            <p:panelGrid id="buttonview" columns="3" styleClass="ui-noborder" >
+
+
+                                <p:row>
+                                    <p:column>                                
+                                        <p:commandButton value="Przyjęte" >
+                                            <p:ajax listener="#{serwisController.findProduktByStatus('Przyjęte')}" update="table"  />
+                                            <f:ajax render="buttonnext"/>
+                                        </p:commandButton>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>                                
+                                        <p:commandButton value="Naprawione" >
+                                            <p:ajax listener="#{serwisController.findProduktByStatus('Naprawione')}" update="table" />
+                                            <f:ajax render="buttonnext"/>
+                                        </p:commandButton>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>                                
+                                        <p:commandButton value="Zwrócone" >
+                                            <p:ajax listener="#{serwisController.findProduktByStatus('Zwrócone')}" update="table" />
+                                            <f:ajax render="buttonnext"/>
+                                        </p:commandButton>
+                                    </p:column>
+                                </p:row>
+
+
+                            </p:panelGrid>
+
+
+                            <p:dataTable id="table" value="#{serwisController.serwisy}" var="item" widgetVar="item" selectionMode="single" selection="#{serwisController.selectedSerwis}" rowKey="#{item.sid}" >
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Magazyn"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.magazyn}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="DataPrzyjecia"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.dataPrzyjecia}">                                  
+                                    </h:outputText>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Marka"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.marka}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Model"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.model}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Usterka"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.usterka}"/>
+                                </p:column>        
+
+                                <p:column style="width:32px;text-align: center">
+                                    <p:commandButton update="aa" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">
+                                        <f:setPropertyActionListener value="#{item}" target="#{serwisController.selectedSerwis}" />
+                                    </p:commandButton>
+                                </p:column>
+
+                            </p:dataTable>
+
+                            <p:panelGrid id="buttonnext" columns="2" styleClass="ui-noborder">        
+
+                                <p:row>
+                                    <p:column>                                
+                                        <p:commandButton value="Zmiań status na naprawiono" rendered="#{serwisController.showButtonNapraw}" action="#{serwisController.showDialogNaprawa()}"  >                                        
+                                        </p:commandButton>                            
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>                                
+                                        <p:commandButton value="Zmień status na zwrócono" rendered="#{serwisController.showButtonZwrocone}" action="#{serwisController.zwrot()}" >
+                                        </p:commandButton>                            
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+
+
+                            <p:dialog header="Szczegóły" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                                <h:form id="form">
+                                    <p:outputPanel id="carDetail" style="text-align:center" autoUpdate="true" >
+                                        <p:panelGrid  id="aa" columns="2" columnClasses="label,value" >
+
+                                            <f:facet name="header">
+                                                <h:outputText value="Dane właściciela:" />
+                                            </f:facet>
+
+                                            <h:outputText value="Imie: " />
+                                            <h:outputText value="#{serwisController.selectedSerwis.klient.imie}" />
+
+                                            <h:outputText value="Nazwisko: " />
+                                            <h:outputText value="#{serwisController.selectedSerwis.klient.nazwisko}" />
+
+                                            <h:outputText value="Kontakt: " />
+                                            <h:outputText value="#{serwisController.selectedSerwis.klient.kontakt}" />
+
+                                            <h:outputText value="Adres: " />
+                                            <h:outputText value="#{serwisController.selectedSerwis.klient.adres}" />
+                                        </p:panelGrid>
+                                    </p:outputPanel>
+                                </h:form>
+                            </p:dialog>
+
+
+                            <p:dialog header="Informacje o naprawie:" widgetVar="carDialog2"  styleClass="ui-noborder" resizable="false">
+                                <h:form id="form2" styleClass="ui-noborder">
+                                    <!--                                    <p:messages id="msgs" />
+                                                                        <p:message for="cena" id="cena" display="icon" />-->
+                                    <p:panel styleClass="ui-noborder">
+                                        <p:inputTextarea rows="7" cols="23" id="info" value="#{serwisController.selectedSerwis.info}" title="Info" required="true" requiredMessage="Wprowadź opis! ">
+                                            <!--                                       <p:ajax update="cena" event="keyup" />-->
+                                        </p:inputTextarea>
+
+                                        <p:panelGrid columns="2">
+                                            <p:commandButton value="Zapisz" oncomplete="PF('carDialog2').hide()">
+                                                <p:ajax listener="#{serwisController.zapiszNaprawa()}" />
+                                            </p:commandButton>  
+
+                                            <p:commandButton value="Odrzuć" oncomplete="PF('carDialog2').hide()">
+                                            </p:commandButton>           
+                                        </p:panelGrid>
+                                    </p:panel>
+                                </h:form>
+                            </p:dialog>
+
+
+
+                        </p:panel>
+                    </h:form>
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>

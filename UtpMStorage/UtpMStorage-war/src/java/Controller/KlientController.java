@@ -66,15 +66,5 @@ public class KlientController implements Serializable {
     public Klient getSelectedKlient() {
         return selectedKlient;
     }
-    
-//    public String wykonajsprzedaz(List<Produkt> produkty)
-//    {
-//        
-//        selectedKlient.setProdukty(produkty);
-//        
-//        this.klientFacade.edit(selectedKlient);
-// 
-//        return "index";
-//    }
 
 }

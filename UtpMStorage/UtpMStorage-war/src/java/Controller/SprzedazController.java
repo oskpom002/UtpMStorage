@@ -51,14 +51,7 @@ public class SprzedazController implements Serializable {
     public Map<Produkt, String> getQuantities() {
         return quantities;
     }
-
-//    public void requiredSelect(Klient k) {
-//    if (k == null) {
-//        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-//                FacesMessage.SEVERITY_ERROR, "Error", "Wybierz klienta!"));
-//    }
-//}
-//    
+ 
     public String sprzedaz(Klient klient, List<Produkt> selectedProdukty) {
         
         if (klient == null) {           
@@ -94,13 +87,11 @@ public class SprzedazController implements Serializable {
             }
             
             produktFacade.edit(produkt);
-            //System.out.println("PETLA");   
         }
 
         klient.setSprzedaze(sprzedazs);
         klientFacade.edit(klient);
-        sprzedazs = new ArrayList<Sprzedaz>();
-       // System.out.println("KONIEC");  
+        sprzedazs = new ArrayList<Sprzedaz>(); 
         RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage("Komunikat","Sprzedaż zakończona! "));
         return "index";
     }
@@ -138,5 +129,8 @@ public class SprzedazController implements Serializable {
 
     public void setSprzedazFacade(SprzedazFacade sprzedazFacade) {
         this.sprzedazFacade = sprzedazFacade;
+       
     }
+    
+    
 }
