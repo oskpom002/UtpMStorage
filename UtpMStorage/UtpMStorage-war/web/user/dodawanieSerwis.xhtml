@@ -24,26 +24,26 @@
 
                                 <p:panel id="datapanel" header="Dodawanie urządzenia do naprawy." style="margin-bottom:10px;width: 400px;">
                                     <p:growl id="growl" sticky="true" /> 
-                                    
+
                                     <p:panelGrid columns="2">
 
                                         <p:outputLabel value="Marka:" for="marka" />
-                                        <p:inputText id="marka" value="#{serwisController.serwis.marka}" title="Marka" required="true"  requiredMessage="Pole marka jest wymagane!" >
+                                        <p:inputText id="marka" value="#{serwisController.serwis.marka}" title="Marka" required="#{param['requireddane'] == null}" requiredMessage="Pole marka jest wymagane!" >
                                             <p:ajax update="growl" event="keyup" />
                                         </p:inputText>
 
                                         <p:outputLabel value="Model:" for="model" />
-                                        <p:inputText id="model" value="#{serwisController.serwis.model}" title="Model" required="true"  requiredMessage="Pole model jest wymagane!" >
+                                        <p:inputText id="model" value="#{serwisController.serwis.model}" title="Model" required="#{param['requireddane'] == null}"  requiredMessage="Pole model jest wymagane!" >
                                             <p:ajax update="growl"  event="keyup" />
                                         </p:inputText>
 
                                         <p:outputLabel value="Magazyn:" for="magazyn" />
-                                        <p:inputText id="magazyn" value="#{serwisController.serwis.magazyn}" title="Magazyn" required="true"  requiredMessage="Pole magazyn jest wymagane!" >
+                                        <p:inputText id="magazyn" value="#{serwisController.serwis.magazyn}" title="Magazyn" required="#{param['requireddane'] == null}"  requiredMessage="Pole magazyn jest wymagane!" >
                                             <p:ajax update="growl"  event="keyup" />
                                         </p:inputText>
 
                                         <p:outputLabel value="Usterka:" for="usterka" />
-                                        <p:inputTextarea rows="10" cols="20" id="usterka" value="#{serwisController.serwis.usterka}" required="true"  title="Usterka" requiredMessage="Wprowadź opis usterki!" >
+                                        <p:inputTextarea rows="10" cols="20" id="usterka" value="#{serwisController.serwis.usterka}" required="#{param['requireddane'] == null}"  title="Usterka" requiredMessage="Wprowadź opis usterki!" >
                                             <p:ajax update="growl"  event="keyup" />
                                         </p:inputTextarea>
                                     </p:panelGrid>
@@ -52,7 +52,7 @@
 
                                 <p:panel id="panel" header="Spis klientów" style="margin-bottom:10px;width: 700px;">
 
-                                    <p:dataTable id="singleDT" var="car" value="#{klientController.findAll()}" selectionMode="single" selection="#{klientController.selectedKlient}" rowKey="#{car.kid}">
+                                    <p:dataTable id="datatable" var="car" value="#{klientController.findAll()}" selectionMode="single" selection="#{klientController.selectedKlient}" rowKey="#{car.kid}">
 
                                         <f:facet name="header">
                                             Proszę wybrać klienta:
@@ -77,12 +77,76 @@
 
                                 </p:panel>
 
-                                <p:commandButton  value="Zapisz"  update="datapanel" action="#{serwisController.dodajSerwis(klientController.selectedKlient)}"/>  
 
+                                <p:panelGrid id="buttonnext" columns="2" styleClass="ui-noborder">        
 
+                                    <p:row>
+                                        <p:column>                                
+                                            <p:commandButton  value="Zapisz"  update="datapanel" action="#{serwisController.dodajSerwis(klientController.selectedKlient)}">
+                                                    <f:param name="requiredklient" value="false"/>
+                                            </p:commandButton> 
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>                                
+                                            <p:commandButton value="Dodaj klienta"  oncomplete="PF('carDialog').show()" >
+                                            </p:commandButton>                            
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
                             </p:panelGrid>
 
                         </p:panel>
+
+
+
+                           <p:dialog header="Dodawanie klienta:" widgetVar="carDialog"  styleClass="ui-noborder" resizable="false">
+                            <h:form id="formaddklient" styleClass="ui-noborder">
+                                <p:panel id="klient" header="Dodaj klienta" style="margin-top:10px;  margin-bottom:10px;width: 500px;">
+                                    <p:messages id="msgss" globalOnly="false" />
+                                    <p:message for="cenaa" id="cenaa" display="icon" />
+
+                                    <p:panelGrid columns="2" columnClasses="forty-percent top-alignment, sixty-percent top-alignment" style="width:100%;"  styleClass="ui-noborder">   
+
+                                        <p:outputLabel value="Imie:" for="imie" />                            
+                                        <p:inputText id="imie" value="#{klientController.klientTemp.imie}" title="Imie" required="#{param['requiredklient'] == null}"  validatorMessage="Niepoprawnie wprowadzone imie! " requiredMessage="Pole imie jest wymagane!" >
+                                            <p:ajax update="cenaa" event="keyup" />                          
+                                        </p:inputText>
+
+                                        <p:outputLabel value="Nazwisko:" for="nazwisko" />
+                                        <p:inputText id="nazwisko" value="#{klientController.klientTemp.nazwisko}" title="Nazwisko" required="#{param['requiredklient'] == null}"  validatorMessage="Niepoprawnie wprowadzone nazwisko! " requiredMessage="Pole nazwisko jest wymagane!"  >
+                                            <p:ajax update="cenaa" event="keyup" />
+                                        </p:inputText>
+
+                                        <p:outputLabel value="Adres:" for="adres" />
+                                        <p:inputText id="adres" value="#{klientController.klientTemp.adres}" title="Adres" required="#{param['requiredklient'] == null}" validatorMessage="Niepoprawnie wprowadzony adres! " requiredMessage="Pole adres jest wymagane!" >
+                                            <p:ajax update="cenaa" event="keyup" />
+                                        </p:inputText>
+
+                                        <p:outputLabel value="Kontakt:" for="kontakt" />
+                                        <p:inputText id="kontakt" value="#{klientController.klientTemp.kontakt}" title="Kontakt" required="#{param['requiredklient'] == null}" validatorMessage="Niepoprawnie wprowadzony kontakt! " requiredMessage="Pole kontakt jest wymagane!"  >
+                                            <p:ajax update="cenaa" event="keyup" />
+                                        </p:inputText>
+
+                                        <p:panelGrid columns="2">
+                                            <p:commandButton  value="Dodaj"  update="klient" action="#{klientController.addKlient()}" >
+                                                <f:param name="requireddane" value="false"/>
+                                            </p:commandButton>
+
+                                            <p:commandButton value="Zamknij" oncomplete="PF('carDialog').hide()" update="#{p:component('datatable')}">                                             
+                                            </p:commandButton>        
+
+                                        </p:panelGrid>
+
+                                    </p:panelGrid>
+                                </p:panel>
+
+                            </h:form>
+                        </p:dialog>
+
+
+
+
                     </h:form>
 
 

@@ -11,6 +11,9 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
 import service.KlientFacade;
 
 /**
@@ -26,8 +29,7 @@ public class KlientController implements Serializable {
 
     private Klient klientTemp = new Klient();
     private Klient selectedKlient;
-    
-    
+
     public KlientController() {
     }
 
@@ -35,7 +37,6 @@ public class KlientController implements Serializable {
         this.selectedKlient = selectedKlient;
     }
 
-    
     public KlientFacade getKlientFacade() {
         return klientFacade;
     }
@@ -52,11 +53,13 @@ public class KlientController implements Serializable {
         this.klientTemp = klientTemp;
     }
 
-    public String addKlient() {
+    public void addKlient() {
         this.klientFacade.create(klientTemp);
         klientTemp = new Klient();
 
-        return "index";
+        
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                FacesMessage.SEVERITY_INFO, "Dodano klienta! ", "Dodano klienta!"));
     }
 
     public List<Klient> findAll() {

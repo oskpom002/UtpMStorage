@@ -109,7 +109,7 @@
                                 </p:row>
                                 <p:row>
                                     <p:column>                                
-                                        <p:commandButton value="Zmień status na zwrócono" rendered="#{serwisController.showButtonZwrocone}" action="#{serwisController.zwrot()}" >
+                                        <p:commandButton value="Zmień status na zwrócono" rendered="#{serwisController.showButtonZwrocone}" action="#{serwisController.showDialogZwrot()}" >
                                         </p:commandButton>                            
                                     </p:column>
                                 </p:row>
@@ -141,14 +141,14 @@
                                 </h:form>
                             </p:dialog>
 
-
                             <p:dialog header="Informacje o naprawie:" widgetVar="carDialog2"  styleClass="ui-noborder" resizable="false">
-                                <h:form id="form2" styleClass="ui-noborder">
-                                    <!--                                    <p:messages id="msgs" />
-                                                                        <p:message for="cena" id="cena" display="icon" />-->
+                                <h:form id="form2" styleClass="ui-noborder">                                                           
                                     <p:panel styleClass="ui-noborder">
+                                        <p:messages id="msgs" />
+                                        <p:message for="cena" id="cena" display="icon" />
+                                        
                                         <p:inputTextarea rows="7" cols="23" id="info" value="#{serwisController.selectedSerwis.info}" title="Info" required="true" requiredMessage="Wprowadź opis! ">
-                                            <!--                                       <p:ajax update="cena" event="keyup" />-->
+                                            <p:ajax update="cena" event="keyup" />
                                         </p:inputTextarea>
 
                                         <p:panelGrid columns="2">
@@ -162,6 +162,30 @@
                                     </p:panel>
                                 </h:form>
                             </p:dialog>
+
+                            <p:dialog header="Zwrot naprawionego towaru:" widgetVar="carDialog3"  styleClass="ui-noborder" resizable="false">
+                                <h:form id="form3" styleClass="ui-noborder">
+                                    <p:messages id="msgs" globalOnly="false" />
+                                    <p:message for="cena" id="cena" display="icon" />
+
+                                    <p:panel styleClass="ui-noborder">
+                                        <p:inputText  value="#{serwisController.sprzedaz.cena}" validatorMessage="Niepoprawnie wprowadzona kwota! " label="Cena" required="true" requiredMessage="Pole ceny jest wymagane!">
+                                            <p:ajax update="cena" event="keyup" />
+                                            <f:validateRegex  pattern="^[-+]?[0-9]*\.?[0-9]{1,2}+$" />
+                                        </p:inputText>
+
+                                        <p:panelGrid columns="2">
+                                            <p:commandButton value="Zapisz" oncomplete="PF('carDialog3').hide()">
+                                                <p:ajax listener="#{serwisController.zwrot()}" />
+                                            </p:commandButton>  
+
+                                            <p:commandButton value="Odrzuć" oncomplete="PF('carDialog3').hide()">
+                                            </p:commandButton>           
+                                        </p:panelGrid>
+                                    </p:panel>
+                                </h:form>
+                            </p:dialog>
+
 
 
 

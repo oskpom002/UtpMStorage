@@ -43,56 +43,59 @@ public class SprzedazController implements Serializable {
     private SprzedazFacade sprzedazFacade;
 
     private Map<Produkt, String> quantities = new HashMap<>();
-    
+
     private Sprzedaz sprzedaz;
     private List<Sprzedaz> sprzedazs = new ArrayList<Sprzedaz>();
-    private Date data = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+  //  private Date data = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
 
     public Map<Produkt, String> getQuantities() {
         return quantities;
     }
- 
-    public String sprzedaz(Klient klient, List<Produkt> selectedProdukty) {
-        
-        if (klient == null) {           
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-                FacesMessage.SEVERITY_ERROR, "Wybierz klienta!", "Wybierz klienta!"));
-            return "";
+
+    public String sprzedaz(Klient klient, List<Produkt> selectedProdukty, Boolean b) {
+
+        if (b) {
+
+            if (klient == null) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                        FacesMessage.SEVERITY_ERROR, "Wybierz klienta!", "Wybierz klienta!"));
+                return "";
+            }
         }
-        
+
         for (Produkt produkt : selectedProdukty) {
             String quantity = quantities.get(produkt);
             //System.out.println("Quantity: " + quantity);          
 
             sprzedaz = new Sprzedaz();
+            if (b) {
+                sprzedaz.setKlient(klient);
+            }
             
-            sprzedaz.setKlient(klient);
             sprzedaz.setProdukt(produkt);
             sprzedaz.setCena(quantity);
-            data.setTime(0); //?????????????????
-          
-            sprzedaz.setDataSprzedazy(Date.from(Instant.now()));       
-            
+
+            sprzedaz.setDataSprzedazy(Date.from(Instant.now()));
+
             sprzedazFacade.create(sprzedaz);
-           
-            int ilosc= produkt.getAktualnailosc()-1;
-            if (ilosc<=0)
-            {
+
+            int ilosc = produkt.getAktualnailosc() - 1;
+            if (ilosc <= 0) {
                 produkt.setAktualnailosc(0);
                 produkt.setStan(Boolean.FALSE);
-            }
-            else
-            {
+            } else {
                 produkt.setAktualnailosc(ilosc);
             }
-            
+
             produktFacade.edit(produkt);
         }
-
-        klient.setSprzedaze(sprzedazs);
-        klientFacade.edit(klient);
-        sprzedazs = new ArrayList<Sprzedaz>(); 
-        RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage("Komunikat","Sprzedaż zakończona! "));
+        
+        if (b) {
+            klient.setSprzedaze(sprzedazs);
+            klientFacade.edit(klient);
+        }
+        sprzedazs = new ArrayList<Sprzedaz>();
+        RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage("Komunikat", "Sprzedaż zakończona! "));
         return "index";
     }
 
@@ -129,8 +132,7 @@ public class SprzedazController implements Serializable {
 
     public void setSprzedazFacade(SprzedazFacade sprzedazFacade) {
         this.sprzedazFacade = sprzedazFacade;
-       
+
     }
-    
-    
+
 }

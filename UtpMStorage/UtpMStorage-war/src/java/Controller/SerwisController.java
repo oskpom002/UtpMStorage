@@ -7,6 +7,7 @@ package Controller;
 
 import entity.Klient;
 import entity.Serwis;
+import entity.Sprzedaz;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -19,6 +20,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 import service.SerwisFacade;
+import service.SprzedazFacade;
 
 /**
  *
@@ -31,8 +33,12 @@ public class SerwisController implements Serializable {
     @EJB
     private SerwisFacade serwisFacade;
 
+    @EJB
+    private SprzedazFacade sprzedazFacade;
+
     private Serwis serwis = new Serwis();
     private Serwis selectedSerwis = new Serwis();
+    private Sprzedaz sprzedaz = new Sprzedaz();
     private String infoTemp;
     private List<Serwis> serwisy = new ArrayList<Serwis>();
     private boolean showButtonNapraw;
@@ -67,6 +73,24 @@ public class SerwisController implements Serializable {
 
     public void setShowButtonNapraw(boolean showButtonNapraw) {
         this.showButtonNapraw = showButtonNapraw;
+    }
+
+    public Sprzedaz getSprzedaz() {
+        return sprzedaz;
+    }
+
+    public SprzedazFacade getSprzedazFacade() {
+        return sprzedazFacade;
+    }
+
+    public void setSprzedazFacade(SprzedazFacade sprzedazFacade) {
+        this.sprzedazFacade = sprzedazFacade;
+    }
+    
+    
+
+    public void setSprzedaz(Sprzedaz sprzedaz) {
+        this.sprzedaz = sprzedaz;
     }
 
     public Serwis getSerwis() {
@@ -124,19 +148,22 @@ public class SerwisController implements Serializable {
 
     public String zwrot() {
         if (selectedSerwis == null) {
-//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-//                    FacesMessage.SEVERITY_ERROR, "Wybierz urządzenie!", "Wybierz urządzenie!"));
             RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage("Komunikat", "Wybierz urządzenie! "));
 
             return "";
         } else {
 
+            sprzedaz.setDataSprzedazy(Date.from(Instant.now()));
+
             selectedSerwis.setDataOddania(Date.from(Instant.now()));
             selectedSerwis.setStatus("Zwrócone");
+
+            sprzedaz.setSerwis(selectedSerwis);
+            sprzedaz.setKlient(selectedSerwis.getKlient());
+
+            sprzedazFacade.create(sprzedaz);
             serwisFacade.edit(selectedSerwis);
 
-//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-//                    FacesMessage.SEVERITY_ERROR, "Produkt zwrócono!", "Produkt zwrócono!"));
             RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage("Komunikat", "Produkt zwrócono! "));
             return "index";
         }
@@ -149,6 +176,16 @@ public class SerwisController implements Serializable {
         } else {
             RequestContext context = RequestContext.getCurrentInstance();
             context.execute("PF('carDialog2').show()");
+        }
+    }
+
+    public void showDialogZwrot() {
+        if (selectedSerwis == null) {
+            RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage("Komunikat", "Wybierz urządzenie! "));
+
+        } else {
+            RequestContext context = RequestContext.getCurrentInstance();
+            context.execute("PF('carDialog3').show()");
         }
     }
 
