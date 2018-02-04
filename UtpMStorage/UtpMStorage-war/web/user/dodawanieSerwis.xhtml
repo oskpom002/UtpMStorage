@@ -37,10 +37,13 @@
                                             <p:ajax update="growl"  event="keyup" />
                                         </p:inputText>
 
-                                        <p:outputLabel value="Magazyn:" for="magazyn" />
-                                        <p:inputText id="magazyn" value="#{serwisController.serwis.magazyn}" title="Magazyn" required="#{param['requireddane'] == null}"  requiredMessage="Pole magazyn jest wymagane!" >
-                                            <p:ajax update="growl"  event="keyup" />
-                                        </p:inputText>
+                                        <p:outputLabel value="Magazyn:" />
+
+                                        <p:selectOneMenu id="magazynn" value="#{magazynController.magazynId}" required="#{param['requireddane'] == null}"  requiredMessage="Wybierz magazyn!"    style="width:150px">       
+                                            <f:selectItem itemLabel="Wybierz magazyn" itemValue=""  />
+                                            <f:selectItems value="#{magazynController.findAll()}"  var="magazyn" itemValue="#{magazyn.mid}"  itemLabel="#{magazyn.nazwa}" />
+                                        </p:selectOneMenu>
+
 
                                         <p:outputLabel value="Usterka:" for="usterka" />
                                         <p:inputTextarea rows="10" cols="20" id="usterka" value="#{serwisController.serwis.usterka}" required="#{param['requireddane'] == null}"  title="Usterka" requiredMessage="Wprowadź opis usterki!" >
@@ -82,8 +85,8 @@
 
                                     <p:row>
                                         <p:column>                                
-                                            <p:commandButton  value="Zapisz"  update="datapanel" action="#{serwisController.dodajSerwis(klientController.selectedKlient)}">
-                                                    <f:param name="requiredklient" value="false"/>
+                                            <p:commandButton  value="Zapisz"  update="datapanel" action="#{serwisController.dodajSerwis(klientController.selectedKlient, magazynController.magazynId )  }">
+                                                <f:param name="requiredklient" value="false"/>
                                             </p:commandButton> 
                                         </p:column>
                                     </p:row>
@@ -100,7 +103,7 @@
 
 
 
-                           <p:dialog header="Dodawanie klienta:" widgetVar="carDialog"  styleClass="ui-noborder" resizable="false">
+                        <p:dialog header="Dodawanie klienta:" widgetVar="carDialog"  styleClass="ui-noborder" resizable="false">
                             <h:form id="formaddklient" styleClass="ui-noborder">
                                 <p:panel id="klient" header="Dodaj klienta" style="margin-top:10px;  margin-bottom:10px;width: 500px;">
                                     <p:messages id="msgss" globalOnly="false" />

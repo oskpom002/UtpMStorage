@@ -28,17 +28,15 @@ import static org.primefaces.component.focus.Focus.PropertyKeys.context;
  */
 @Named(value = "logoutController")
 @SessionScoped
-public class logoutController implements Serializable{
+public class logoutController implements Serializable {
 
     /**
      * Creates a new instance of logoutController
      */
     public logoutController() {
     }
-    
-  public void logout() {
-FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-  }
+
+    public void logout() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+    }
 }
-
-

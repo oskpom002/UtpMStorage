@@ -12,6 +12,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 import service.CustomeProductFacade;
 import service.DostawaFacade;
+import service.MagazynFacade;
 
 /**
  *
@@ -30,6 +31,9 @@ public class ProduktController implements Serializable {
     @EJB
     private DostawaFacade dostawaFacade;
 
+    @EJB
+    private MagazynFacade magazynFacade;
+
     //Używane podczas zakupu
     private List<Produkt> selectedProdukty;
     private Produkt selectedProduct;
@@ -41,7 +45,7 @@ public class ProduktController implements Serializable {
 
     private String ilosc;
     private String imei;
-    private String magazyn;
+    //   private String magazyn;
     private String marka;
     private String model;
     private String typ;
@@ -92,14 +96,13 @@ public class ProduktController implements Serializable {
         this.imei = imei;
     }
 
-    public String getMagazyn() {
-        return magazyn;
-    }
-
-    public void setMagazyn(String magazyn) {
-        this.magazyn = magazyn;
-    }
-
+//    public String getMagazyn() {
+//        return magazyn;
+//    }
+//
+//    public void setMagazyn(String magazyn) {
+//        this.magazyn = magazyn;
+//    }
     public String getMarka() {
         return marka;
     }
@@ -210,15 +213,12 @@ public class ProduktController implements Serializable {
      *
      * @return
      */
-    public void add() {
+    public void add(Integer magazynId) {
         FacesContext context = FacesContext.getCurrentInstance();
         if (ilosc.equals("") || ilosc.equals(null)) {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole ilość nie może być puste"));
 
-        } else if (magazyn.equals("") || magazyn.equals(null)) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole magazyn nie może być puste"));
-
-        } else if (marka.equals("") || magazyn.equals(null)) {
+        } else if (marka.equals("")) {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole marka nie może być puste"));
         } else if (model.equals("") || model.equals(null)) {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole marka nie może być puste"));
@@ -228,7 +228,11 @@ public class ProduktController implements Serializable {
             produktTemp = new Produkt();
             produktTemp.setStan(Boolean.TRUE);
             produktTemp.setTyp(typ);
-            produktTemp.setMagazyn(magazyn);
+
+            Magazyn magazynTemp = magazynFacade.findMagazynByMid(magazynId);
+            produktTemp.setMagazyn(magazynTemp);
+
+            //produktTemp.setMagazyn(magazyn);
             produktTemp.setModel(model);
             produktTemp.setMarka(marka);
             produktTemp.setIlosc(Integer.valueOf(ilosc));
@@ -239,7 +243,7 @@ public class ProduktController implements Serializable {
             }
             produktListTemp.add(produktTemp);
             typ = "";
-            magazyn = "";
+            //magazyn = "";
             model = "";
             imei = "";
             marka = "";

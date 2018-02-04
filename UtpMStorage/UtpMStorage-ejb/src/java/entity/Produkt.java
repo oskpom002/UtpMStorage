@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -51,16 +52,13 @@ public class Produkt implements Serializable {
     @Column(name = "ilosc")
     private Integer ilosc;
 
-    
     @Column(name = "aktualnailosc")
     private Integer aktualnailosc;
-    
+
     @Size(max = 255)
     @Column(name = "imei")
     private String imei;
-    @Size(max = 255)
-    @Column(name = "magazyn")
-    private String magazyn;
+
     @Size(max = 255)
     @Column(name = "marka")
     private String marka;
@@ -76,10 +74,21 @@ public class Produkt implements Serializable {
     @ManyToMany(mappedBy = "produkty")
     private List<Dostawa> dostawy;
 
-    @OneToMany (mappedBy = "produkt")
-    private List <Sprzedaz> sprzedaze;
+    @OneToMany(mappedBy = "produkt")
+    private List<Sprzedaz> sprzedaze;
+
+    @ManyToOne
+    private Magazyn magazyn;
 
     public Produkt() {
+    }
+
+    public Magazyn getMagazyn() {
+        return magazyn;
+    }
+
+    public void setMagazyn(Magazyn magazyn) {
+        this.magazyn = magazyn;
     }
 
     public List<Sprzedaz> getSprzedaze() {
@@ -89,7 +98,6 @@ public class Produkt implements Serializable {
     public void setSprzedaze(List<Sprzedaz> sprzedaze) {
         this.sprzedaze = sprzedaze;
     }
-
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -107,7 +115,6 @@ public class Produkt implements Serializable {
         this.pid = pid;
     }
 
-    
     public Integer getAktualnailosc() {
         return aktualnailosc;
     }
@@ -116,7 +123,6 @@ public class Produkt implements Serializable {
         this.aktualnailosc = aktualnailosc;
     }
 
-    
     public Integer getPid() {
         return pid;
     }
@@ -139,14 +145,6 @@ public class Produkt implements Serializable {
 
     public void setImei(String imei) {
         this.imei = imei;
-    }
-
-    public String getMagazyn() {
-        return magazyn;
-    }
-
-    public void setMagazyn(String magazyn) {
-        this.magazyn = magazyn;
     }
 
     public String getMarka() {

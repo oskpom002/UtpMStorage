@@ -6,6 +6,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -49,6 +51,12 @@ public class Magazyn implements Serializable {
     @Column(name = "nazwa")
     private String nazwa;
 
+    @OneToMany(mappedBy = "magazyn")
+    private List<Serwis> serwisy;
+
+    @OneToMany(mappedBy = "magazyn")
+    private List<Produkt> produkty;
+
     public Magazyn() {
     }
 
@@ -60,6 +68,25 @@ public class Magazyn implements Serializable {
         this.mid = mid;
         this.nazwa = nazwa;
     }
+
+    public List<Serwis> getSerwisy() {
+        return serwisy;
+    }
+
+    public void setSerwisy(List<Serwis> serwisy) {
+        this.serwisy = serwisy;
+    }
+
+    public List<Produkt> getProdukty() {
+        return produkty;
+    }
+
+    public void setProdukty(List<Produkt> produkty) {
+        this.produkty = produkty;
+    }
+    
+    
+    
 
     public Integer getMid() {
         return mid;
@@ -109,5 +136,5 @@ public class Magazyn implements Serializable {
     public String toString() {
         return "entity.Magazyny[ mid=" + mid + " ]";
     }
-    
+
 }

@@ -37,14 +37,6 @@ public class KlientController implements Serializable {
         this.selectedKlient = selectedKlient;
     }
 
-    public KlientFacade getKlientFacade() {
-        return klientFacade;
-    }
-
-    public void setKlientFacade(KlientFacade klientFacade) {
-        this.klientFacade = klientFacade;
-    }
-
     public Klient getKlientTemp() {
         return klientTemp;
     }

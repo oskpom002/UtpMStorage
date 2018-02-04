@@ -59,7 +59,7 @@
                                     <f:facet name="header">
                                         <h:outputText value="Magazyn"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.magazyn}"/>
+                                    <h:outputText value="#{item.magazyn.nazwa}"/>
                                 </p:column>
 
                                 <p:column>
@@ -143,7 +143,7 @@
 
                             <p:dialog header="Informacje o naprawie:" widgetVar="carDialog2"  styleClass="ui-noborder" resizable="false">
                                 <h:form id="form2" styleClass="ui-noborder">                                                           
-                                    <p:panel styleClass="ui-noborder">
+                                    <p:panel  styleClass="ui-noborder" header="Wprowadź opis naprawy" style="margin-top:10px;  margin-bottom:10px;width: 250px;" >
                                         <p:messages id="msgs" />
                                         <p:message for="cena" id="cena" display="icon" />
                                         
@@ -168,7 +168,7 @@
                                     <p:messages id="msgs" globalOnly="false" />
                                     <p:message for="cena" id="cena" display="icon" />
 
-                                    <p:panel styleClass="ui-noborder">
+                                    <p:panel  styleClass="ui-noborder" header="Wprowadź cenę" style="margin-top:10px;  margin-bottom:10px;width: 250px;" >
                                         <p:inputText  value="#{serwisController.sprzedaz.cena}" validatorMessage="Niepoprawnie wprowadzona kwota! " label="Cena" required="true" requiredMessage="Pole ceny jest wymagane!">
                                             <p:ajax update="cena" event="keyup" />
                                             <f:validateRegex  pattern="^[-+]?[0-9]*\.?[0-9]{1,2}+$" />

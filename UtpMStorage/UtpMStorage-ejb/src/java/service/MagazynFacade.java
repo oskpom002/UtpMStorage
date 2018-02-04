@@ -28,5 +28,12 @@ public class MagazynFacade extends AbstractFacade<Magazyn> {
     public MagazynFacade() {
         super(Magazyn.class);
     }
-    
+
+    public Magazyn findMagazynByMid(Integer mid) {
+        return (Magazyn) em.createQuery("SELECT m FROM Magazyn m WHERE m.mid=:mid")
+                .setParameter("mid", mid)
+                .getSingleResult();
+
+    }
+
 }

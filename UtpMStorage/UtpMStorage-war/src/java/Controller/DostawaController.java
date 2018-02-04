@@ -52,22 +52,6 @@ public class DostawaController implements Serializable {
     public DostawaController() {
     }
 
-    public CustomeProductFacade getCustomeProductFacade() {
-        return customeProductFacade;
-    }
-
-    public void setCustomeProductFacade(CustomeProductFacade customeProductFacade) {
-        this.customeProductFacade = customeProductFacade;
-    }
-
-    public ProduktFacade getProduktFacade() {
-        return produktFacade;
-    }
-
-    public void setProduktFacade(ProduktFacade produktFacade) {
-        this.produktFacade = produktFacade;
-    }
-
     public Boolean getStatusViewProdukt() {
         return statusViewProdukt;
     }
@@ -76,20 +60,8 @@ public class DostawaController implements Serializable {
         this.statusViewProdukt = statusViewProdukt;
     }
 
-    public DostawaFacade getDostawaFacade() {
-        return dostawaFacade;
-    }
-
-    public Dostawa getSelectedDostawa() {
-        return selectedDostawa;
-    }
-
     public void setSelectedDostawa(Dostawa selectedDostawa) {
         this.selectedDostawa = selectedDostawa;
-    }
-
-    public void setDostawaFacade(DostawaFacade dostawaFacade) {
-        this.dostawaFacade = dostawaFacade;
     }
 
     public List<Dostawa> findAll() {
@@ -123,7 +95,6 @@ public class DostawaController implements Serializable {
     public List<Produkt> findProduktByDostawa() {
         return this.customeProductFacade.findProduktByDostawa(data);
     }
-
 
     public void findProduktByDataDostawy(boolean statusView) {
         statusViewProdukt = statusView;

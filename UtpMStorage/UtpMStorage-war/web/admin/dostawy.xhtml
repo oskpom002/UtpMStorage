@@ -17,26 +17,33 @@
             <ui:composition template="/template/template.xhtml">
                 <ui:define name="title">Strona główna</ui:define>
                 <ui:define name="content">
-                    
-                    
+
+
                     <h:form>
                         <p:growl id="msgs"  sticky="true" autoUpdate="true"/>
                         <p:panel id="dost" header="Dostawy">
-                            
+
                             <p:panelGrid columns="2" styleClass="ui-noborder" >
 
                                 <p:row>
                                     <p:column>
                                         <p:panel id="panel" header="Dodaj produkt" />
-
+                                        <p:growl id="growl" sticky="true" /> 
                                         <p:panelGrid id="panelGrid1" columns="2" columnClasses="forty-percent top-alignment, sixty-percent top-alignment" style="width:100%;" styleClass="ui-noborder">                          
 
                                             <p:outputLabel value="Ilosc:" for="ilosc" />
                                             <p:inputText id="ilosc" value="#{produktController.ilosc}" title="Ilosc"/>
                                             <p:outputLabel value="Imei:" for="imei" />
                                             <p:inputText id="imei" value="#{produktController.imei}" title="Imei" />
-                                            <p:outputLabel value="Magazyn:" for="magazyn" />
-                                            <p:inputText id="magazyn" value="#{produktController.magazyn}" title="Magazyn"/>
+
+                                            <p:outputLabel value="Magazyn:" />
+
+                                            <p:selectOneMenu id="magazynn" value="#{magazynController.magazynId}" required="#{param['requireddane'] == null}"  requiredMessage="Wybierz magazyn!"    style="width:150px">       
+                                                <f:selectItem itemLabel="Wybierz magazyn" itemValue=""  />
+                                                <f:selectItems value="#{magazynController.findAll()}"  var="magazyn" itemValue="#{magazyn.mid}"  itemLabel="#{magazyn.nazwa}" />
+                                            </p:selectOneMenu>
+
+
                                             <p:outputLabel value="Marka:" for="marka" />
                                             <p:inputText id="marka" value="#{produktController.marka}" title="Marka" />
                                             <p:outputLabel value="Model:" for="model" />
@@ -47,7 +54,7 @@
                                         </p:panelGrid>
                                         <p:calendar id="dcData" value="#{produktController.dostawaTemp.dataZamowienia}" mode="dcData" style="vertical-align: central"/>
 
-                                        <p:commandButton value="Dodaj" action="#{produktController.add()}" ajax="true" update="produktyTabel"   >    
+                                        <p:commandButton value="Dodaj" action="#{produktController.add(magazynController.magazynId)}" ajax="true" update="produktyTabel"   >    
                                             <f:ajax execute="@this" render="panelGrid1"/>
                                         </p:commandButton>
 
@@ -76,7 +83,7 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="Magazyn"/>
                                                 </f:facet>
-                                                <h:outputText value="#{item.magazyn}"/>
+                                                <h:outputText value="#{item.magazyn.nazwa}"/>
                                             </p:column>
                                             <p:column>
                                                 <f:facet name="header">
@@ -101,6 +108,7 @@
 
 
                                         <p:commandButton value="Dodaj dane do bazy danych" action="#{produktController.addToDataBase()}" ajax="true" update="produktyTabel"  >
+                                            <f:param name="requireddane" value="false"/>
                                         </p:commandButton>
 
                                     </p:column>

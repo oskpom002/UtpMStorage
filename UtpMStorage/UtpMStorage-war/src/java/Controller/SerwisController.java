@@ -6,6 +6,7 @@
 package Controller;
 
 import entity.Klient;
+import entity.Magazyn;
 import entity.Serwis;
 import entity.Sprzedaz;
 import javax.inject.Named;
@@ -19,6 +20,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
+import service.MagazynFacade;
 import service.SerwisFacade;
 import service.SprzedazFacade;
 
@@ -36,6 +38,9 @@ public class SerwisController implements Serializable {
     @EJB
     private SprzedazFacade sprzedazFacade;
 
+    @EJB
+    private MagazynFacade magazynFacade;
+
     private Serwis serwis = new Serwis();
     private Serwis selectedSerwis = new Serwis();
     private Sprzedaz sprzedaz = new Sprzedaz();
@@ -47,6 +52,7 @@ public class SerwisController implements Serializable {
     /**
      * Creates a new instance of SerwisController
      */
+    
     public SerwisController() {
 //        serwisy=findAll();
     }
@@ -79,15 +85,6 @@ public class SerwisController implements Serializable {
         return sprzedaz;
     }
 
-    public SprzedazFacade getSprzedazFacade() {
-        return sprzedazFacade;
-    }
-
-    public void setSprzedazFacade(SprzedazFacade sprzedazFacade) {
-        this.sprzedazFacade = sprzedazFacade;
-    }
-    
-    
 
     public void setSprzedaz(Sprzedaz sprzedaz) {
         this.sprzedaz = sprzedaz;
@@ -121,13 +118,6 @@ public class SerwisController implements Serializable {
         this.serwisy = serwisy;
     }
 
-    public SerwisFacade getSerwisFacade() {
-        return serwisFacade;
-    }
-
-    public void setSerwisFacade(SerwisFacade serwisFacade) {
-        this.serwisFacade = serwisFacade;
-    }
 
     public void findProduktByStatus(String status) {
         serwisy = this.serwisFacade.findProduktByStatus(status);
@@ -198,7 +188,7 @@ public class SerwisController implements Serializable {
         return "index";
     }
 
-    public String dodajSerwis(Klient klient) {
+    public String dodajSerwis(Klient klient, Integer magazynId) {
 
         if (klient == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
@@ -206,8 +196,12 @@ public class SerwisController implements Serializable {
             return "";
         }
 
+        
+        Magazyn magazynTemp=magazynFacade.findMagazynByMid(magazynId);
+        
         serwis.setKlient(klient);
         serwis.setStatus("Przyjęte");
+        serwis.setMagazyn(magazynTemp);      
 
         serwis.setDataPrzyjecia(Date.from(Instant.now()));
 

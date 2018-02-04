@@ -85,10 +85,12 @@
                                             </p:column>
 
                                             <p:column headerText="Magazyn">
+                                                
                                                 <p:cellEditor>
-                                                    <f:facet name="output"> <h:outputText value="#{item.magazyn}" /> </f:facet>
-                                                    <f:facet name="input"> <p:inputText   value="#{item.magazyn}" /></f:facet>
+                                                    <f:facet name="output"> <h:outputText value="#{item.magazyn.nazwa}" /> </f:facet>
+                                                    <f:facet name="input"> <p:inputText   value="#{item.magazyn.nazwa}" /></f:facet>
                                                 </p:cellEditor>
+                                                
                                             </p:column>
 
                                             <p:column headerText="Imei">

@@ -43,21 +43,17 @@ public class Serwis implements Serializable {
     private Date dataOddania;
 
     @Size(max = 255)
-    @Column(name = "magazyn")
-    private String magazyn;
-    
-    @Size(max = 255)
     @Column(name = "marka")
     private String marka;
-    
+
     @Size(max = 255)
     @Column(name = "model")
     private String model;
-    
+
     @Size(max = 255)
     @Column(name = "usterka")
     private String usterka;
-    
+
     @Size(max = 255)
     @Column(name = "status")
     private String status;
@@ -72,24 +68,30 @@ public class Serwis implements Serializable {
     @OneToOne(mappedBy = "serwis")
     private Sprzedaz sprzedaz;
 
+    @ManyToOne
+    private Magazyn magazyn;
+
     public String getInfo() {
         return info;
     }
+
+    public Magazyn getMagazyn() {
+        return magazyn;
+    }
+
+    public void setMagazyn(Magazyn magazyn) {
+        this.magazyn = magazyn;
+    }
+    
+    
+    
 
     public void setInfo(String info) {
         this.info = info;
     }
 
-    public String getMagazyn() {
-        return magazyn;
-    }
-
     public static long getSerialVersionUID() {
         return serialVersionUID;
-    }
-
-    public void setMagazyn(String magazyn) {
-        this.magazyn = magazyn;
     }
 
     public Date getDataPrzyjecia() {
@@ -108,9 +110,6 @@ public class Serwis implements Serializable {
         this.dataOddania = dataOddania;
     }
 
-    
-    
-    
     public String getMarka() {
         return marka;
     }

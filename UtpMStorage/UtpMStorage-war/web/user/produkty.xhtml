@@ -28,14 +28,14 @@
                                     Produkty
                                 </f:facet>
                                 <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
-                                <p:column headerText="Magazyn" filterBy="#{car.magazyn}" sortBy="#{car.magazyn}" filterMatchMode="exact">
+                                <p:column headerText="Magazyn" filterBy="#{car.magazyn.nazwa}" sortBy="#{car.magazyn.nazwa}" filterMatchMode="exact">
                                     <f:facet name="filter">
                                         <p:selectOneMenu onchange="PF('carsTable').filter()" style="width:100px;" >
                                             <f:selectItem itemLabel="Wszystkie" itemValue="#{null}" noSelectionOption="true" />
                                             <f:selectItems value="#{produktController.findMagazyny()}" />
                                         </p:selectOneMenu>
                                     </f:facet>
-                                    <h:outputText value="#{car.magazyn}" />
+                                    <h:outputText value="#{car.magazyn.nazwa}" />
                                 </p:column>
                                 <p:column headerText="Typ" filterBy="#{car.typ}" sortBy="#{car.typ}" filterMatchMode="exact">
                                     <f:facet name="filter">

@@ -102,7 +102,7 @@ public class CustomeProductFacade {
     }
 
     public List<Produkt> findMagazyny() {
-        return em.createQuery("SELECT DISTINCT(p.magazyn) FROM Produkt p")
+        return em.createQuery("SELECT DISTINCT(p.magazyn.nazwa) FROM Produkt p")
                 .getResultList();
     }
     public List<Produkt> findProduktByDostawa(Date data) {
