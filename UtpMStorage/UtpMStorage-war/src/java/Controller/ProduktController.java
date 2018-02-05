@@ -43,12 +43,12 @@ public class ProduktController implements Serializable {
     private List<Produkt> produktListTemp = new ArrayList<Produkt>();
     private Produkt produktTemp = new Produkt();
 
-    private String ilosc;
-    private String imei;
-    //   private String magazyn;
-    private String marka;
-    private String model;
-    private String typ;
+//    private String ilosc;
+//    private String imei;
+//    //   private String magazyn;
+//    private String marka;
+//    private String model;
+//    private String typ;
 
     /**
      * Creates a new instance of ProduktController
@@ -80,21 +80,21 @@ public class ProduktController implements Serializable {
         return (List<Produkt>) this.produktFacade.find(this);
     }
 
-    public String getIlosc() {
-        return ilosc;
-    }
-
-    public void setIlosc(String ilosc) {
-        this.ilosc = ilosc;
-    }
-
-    public String getImei() {
-        return imei;
-    }
-
-    public void setImei(String imei) {
-        this.imei = imei;
-    }
+//    public String getIlosc() {
+//        return ilosc;
+//    }
+//
+//    public void setIlosc(String ilosc) {
+//        this.ilosc = ilosc;
+//    }
+//
+//    public String getImei() {
+//        return imei;
+//    }
+//
+//    public void setImei(String imei) {
+//        this.imei = imei;
+//    }
 
 //    public String getMagazyn() {
 //        return magazyn;
@@ -103,29 +103,29 @@ public class ProduktController implements Serializable {
 //    public void setMagazyn(String magazyn) {
 //        this.magazyn = magazyn;
 //    }
-    public String getMarka() {
-        return marka;
-    }
-
-    public void setMarka(String marka) {
-        this.marka = marka;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getTyp() {
-        return typ;
-    }
-
-    public void setTyp(String typ) {
-        this.typ = typ;
-    }
+//    public String getMarka() {
+//        return marka;
+//    }
+//
+//    public void setMarka(String marka) {
+//        this.marka = marka;
+//    }
+//
+//    public String getModel() {
+//        return model;
+//    }
+//
+//    public void setModel(String model) {
+//        this.model = model;
+//    }
+//
+//    public String getTyp() {
+//        return typ;
+//    }
+//
+//    public void setTyp(String typ) {
+//        this.typ = typ;
+//    }
 
     public ProduktFacade getProduktFacade() {
         return produktFacade;
@@ -214,43 +214,45 @@ public class ProduktController implements Serializable {
      * @return
      */
     public void add(Integer magazynId) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        if (ilosc.equals("") || ilosc.equals(null)) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole ilość nie może być puste"));
+//        FacesContext context = FacesContext.getCurrentInstance();
+//        if (ilosc.equals("") || ilosc.equals(null)) {
+//            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole ilość nie może być puste"));
+//
+//        } else if (marka.equals("")) {
+//            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole marka nie może być puste"));
+//        } else if (model.equals("") || model.equals(null)) {
+//            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole marka nie może być puste"));
+//        } else if (typ.equals("") || typ.equals(null)) {
+//            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole typ nie może być puste"));
+//        } else {
+           // produktTemp = new Produkt();
+           
+//            produktTemp.setTyp(typ);
 
-        } else if (marka.equals("")) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole marka nie może być puste"));
-        } else if (model.equals("") || model.equals(null)) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole marka nie może być puste"));
-        } else if (typ.equals("") || typ.equals(null)) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Błąd", "Pole typ nie może być puste"));
-        } else {
-            produktTemp = new Produkt();
             produktTemp.setStan(Boolean.TRUE);
-            produktTemp.setTyp(typ);
-
+            produktTemp.setAktualnailosc(produktTemp.getIlosc());
             Magazyn magazynTemp = magazynFacade.findMagazynByMid(magazynId);
             produktTemp.setMagazyn(magazynTemp);
 
             //produktTemp.setMagazyn(magazyn);
-            produktTemp.setModel(model);
-            produktTemp.setMarka(marka);
-            produktTemp.setIlosc(Integer.valueOf(ilosc));
-            produktTemp.setAktualnailosc(Integer.valueOf(ilosc));
-
-            if (!imei.equals(null) || imei.equals("")) {
-                produktTemp.setImei(imei);
-            }
+//            produktTemp.setModel(model);
+//            produktTemp.setMarka(marka);
+//            produktTemp.setIlosc(Integer.valueOf(ilosc));
+//            produktTemp.setAktualnailosc(Integer.valueOf(ilosc));
+//
+//            if (!imei.equals(null) || imei.equals("")) {
+//                produktTemp.setImei(imei);
+//            }
             produktListTemp.add(produktTemp);
-            typ = "";
-            //magazyn = "";
-            model = "";
-            imei = "";
-            marka = "";
-            ilosc = "";
+//            typ = "";
+//            //magazyn = "";
+//            model = "";
+//            imei = "";
+//            marka = "";
+//            ilosc = "";
 
             produktTemp = new Produkt();
-        }
+//        }
 
     }
 

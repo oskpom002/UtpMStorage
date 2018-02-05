@@ -11,6 +11,8 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import service.MagazynFacade;
 
 /**
@@ -25,13 +27,12 @@ public class MagazynController implements Serializable {
     private MagazynFacade magazynFacade;
 
     private Magazyn selectedMagazyn;
-  
-   //Do combobox przy wyborze magazynu
+
+    //Do combobox przy wyborze magazynu
     private Integer magazynId;
 
     public MagazynController() {
     }
-
 
     public Integer getMagazynId() {
         return magazynId;
@@ -55,6 +56,17 @@ public class MagazynController implements Serializable {
 
     public List<Magazyn> findAll() {
         return this.magazynFacade.findAll();
+    }
+
+    public void addMagazyn() {
+        magazynFacade.create(selectedMagazyn);
+        
+        selectedMagazyn=new Magazyn();
+
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                FacesMessage.SEVERITY_INFO, "Dodano magazyn!", "Dodano magazyn!"));
+
+
     }
 
 }
